@@ -59,7 +59,7 @@ export function generatePGN(
     try {
       game.move(move);
     } catch (e) {
-      console.error("Invalid move in PGN generation:", move);
+      // Silently skip invalid moves
       break;
     }
   }

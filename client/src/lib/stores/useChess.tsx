@@ -392,7 +392,7 @@ export const useChess = create<ChessState>((set, get) => ({
           lastTo = result.to as Square;
         }
       } catch (e) {
-        console.error("Invalid move in PGN:", move, e);
+        // Silently skip invalid moves
         break;
       }
     }
