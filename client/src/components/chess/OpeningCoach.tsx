@@ -436,12 +436,22 @@ export function OpeningCoach({ onBack }: OpeningCoachProps) {
     );
   }
 
-  // Game Screen
+  // Game Screen - Only show if opening is selected
+  if (!currentOpening) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-purple-950 to-slate-950 text-white flex items-center justify-center">
+        <div className="text-center">
+          <p className="text-slate-400">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-purple-950 to-slate-950 text-white p-3 sm:p-4 md:p-6">
       <div className="w-full max-w-7xl mx-auto">
         <button
-          onClick={() => setSelectedOpeningId(null)}
+          onClick={() => { setSelectedOpeningId(null); setGameMode('select'); }}
           className="flex items-center gap-2 mb-4 sm:mb-6 px-3 sm:px-4 py-2 rounded-lg hover:bg-white/10 transition-colors text-slate-300 hover:text-white text-sm sm:text-base"
         >
           <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
