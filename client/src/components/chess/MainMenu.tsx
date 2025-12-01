@@ -6,6 +6,7 @@ import {
   Users, 
   BookOpen, 
   Bot,
+  Wifi,
   Crown,
   Palette,
   Moon,
@@ -78,11 +79,21 @@ export function MainMenu() {
           
           <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
             <Button
+              className="w-full h-16 text-lg bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800"
+              onClick={() => setGameMode("online")}
+            >
+              <Wifi className="w-6 h-6 mr-3" />
+              Play with Friends
+            </Button>
+          </motion.div>
+          
+          <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+            <Button
               className="w-full h-16 text-lg bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800"
               onClick={() => setGameMode("review")}
             >
               <BookOpen className="w-6 h-6 mr-3" />
-              Bobby Fischer Games
+              Legendary Games
             </Button>
           </motion.div>
         </Card>

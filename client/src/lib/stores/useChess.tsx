@@ -58,9 +58,6 @@ interface ChessState {
   toggleEvaluation: () => void;
   updateEvaluation: () => void;
   
-  gameCode: string | null;
-  isOnline: boolean;
-  opponentName: string;
   startOnlineGame: (code?: string) => void;
   syncMove: (move: { from: string; to: string; san: string }) => void;
   setGameCode: (code: string | null) => void;

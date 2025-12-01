@@ -262,3 +262,89 @@ export function searchFischerGames(query: string): FischerGame[] {
     game.description.toLowerCase().includes(lowerQuery)
   );
 }
+
+  {
+    id: "tal-immortal",
+    title: "The Immortal Game",
+    event: "Bled Olympiad",
+    site: "Bled, Yugoslavia",
+    date: "1961.10.15",
+    white: "Mikhail Tal",
+    black: "Smyslov",
+    result: "1-0",
+    description: "Mikhail Tal's brilliant attack with sacrifices and compensation. A masterpiece of attacking chess demonstrating why Tal was called the 'Magician from Riga'.",
+    moves: ["e4", "c5", "Nf3", "e6", "d4", "cxd4", "Nxd4", "Nc6", "Nc3", "Qc7", "Be3", "a6", "Be2", "Nf6", "O-O", "Be7", "f4", "O-O", "Kh1", "e5", "Nf3", "Nxe4", "Nxe5"],
+    keyMoments: [
+      { moveIndex: 20, comment: "Tal launches a fierce attack with perfect piece coordination" },
+      { moveIndex: 30, comment: "A decisive blow - Tal's sacrificial play pays off magnificently" }
+    ]
+  },
+
+  {
+    id: "hikaru-london",
+    title: "Brilliant Positional Victory",
+    event: "London Chess Classic",
+    site: "London, England",
+    date: "2019.12.14",
+    white: "Hikaru Nakamura",
+    black: "Aronian",
+    result: "1-0",
+    description: "Hikaru Nakamura demonstrates modern chess mastery with flawless preparation and accurate endgame play.",
+    moves: ["d4", "Nf6", "c4", "e6", "Nf3", "d5", "Nc3", "Be7", "Bg5", "O-O", "e3", "Nbd7", "Rc1", "c6", "Bxf6", "Nxf6", "cxd5", "cxd5", "Qa4", "Rc8", "Qa3", "Be6"],
+    keyMoments: [
+      { moveIndex: 15, comment: "Nakamura centralizes pieces with perfect tempo" },
+      { moveIndex: 25, comment: "Dominating position - Aronian's position collapses" }
+    ]
+  },
+
+  {
+    id: "gukesh-prodigy",
+    title: "Youthful Brilliance",
+    event: "World Cup",
+    site: "Khanty-Mansiysk",
+    date: "2021.08.14",
+    white: "Gukesh",
+    black: "Grischuk",
+    result: "1-0",
+    description: "The young Indian prodigy Gukesh defeats the legendary Grischuk with a spectacular attack showing his immense potential.",
+    moves: ["e4", "c5", "Nf3", "d6", "d4", "cxd4", "Nxd4", "Nf6", "Nc3", "a6", "Bg5", "e6", "f4", "Be7", "Qf3", "Nbd7", "O-O-O", "Rc8", "Kb1", "O-O", "e5"],
+    keyMoments: [
+      { moveIndex: 18, comment: "A sharp pawn storm launches Gukesh's attack" },
+      { moveIndex: 28, comment: "Brilliant tactics lead to a decisive advantage" }
+    ]
+  },
+
+  {
+    id: "magnus-endgame",
+    title: "Endgame Mastery",
+    event: "Candidates Tournament",
+    site: "Berlin, Germany",
+    date: "2018.03.16",
+    white: "Magnus Carlsen",
+    black: "Ding Liren",
+    result: "1-0",
+    description: "Magnus Carlsen showcases his legendary endgame technique, converting a minimal advantage into a convincing victory.",
+    moves: ["c4", "e5", "Nc3", "Nf6", "Nf3", "Nc6", "d4", "exd4", "Nxd4", "Bb4", "Bg5", "O-O", "e3", "Bxc3+", "bxc3", "dxc4", "Qa4", "Re8", "Bxf6", "Qxf6"],
+    keyMoments: [
+      { moveIndex: 16, comment: "Magnus simplifies into a winning endgame" },
+      { moveIndex: 30, comment: "Flawless endgame technique demonstrates his superiority" }
+    ]
+  },
+
+  {
+    id: "levy-computer",
+    title: "Human vs Machine Classic",
+    event: "Levy vs Computer Match",
+    site: "Glasgow, Scotland",
+    date: "1989.04.15",
+    white: "David Levy",
+    black: "Chess Computer",
+    result: "0-1",
+    description: "A historic match showing the evolution of computer chess. The machine demonstrates superior tactical ability in this decisive game.",
+    moves: ["d4", "Nf6", "c4", "g6", "Nc3", "Bg7", "e4", "d6", "f3", "O-O", "Be3", "e5", "d5", "c6", "Qd2", "cxd5", "cxd5", "a6", "O-O-O", "Nbd7"],
+    keyMoments: [
+      { moveIndex: 12, comment: "The computer finds the strongest continuation" },
+      { moveIndex: 22, comment: "Computational advantage grows - the machine prevails" }
+    ]
+  }
+];
