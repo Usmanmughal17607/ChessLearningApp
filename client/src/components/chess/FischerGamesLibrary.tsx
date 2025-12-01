@@ -1,5 +1,5 @@
-import { fischerGames, FischerGame } from "@/data/fischerGames";
-import { useChess } from "@/lib/stores/useChess";
+import { fischerGames } from "@/data/fischerGames";
+import { useChess, FischerGame } from "@/lib/stores/useChess";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
