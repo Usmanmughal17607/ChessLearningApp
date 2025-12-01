@@ -248,7 +248,7 @@ export const fischerGames: FischerGame[] = [
   },
   {
     id: "tal-immortal",
-    title: "The Immortal Game",
+    title: "Mikhail Tal - The Immortal Game",
     event: "Bled Olympiad",
     site: "Bled, Yugoslavia",
     date: "1961.10.15",
@@ -264,7 +264,7 @@ export const fischerGames: FischerGame[] = [
   },
   {
     id: "hikaru-london",
-    title: "Brilliant Positional Victory",
+    title: "Hikaru Nakamura - Brilliant Positional Victory",
     event: "London Chess Classic",
     site: "London, England",
     date: "2019.12.14",
@@ -280,7 +280,7 @@ export const fischerGames: FischerGame[] = [
   },
   {
     id: "gukesh-prodigy",
-    title: "Youthful Brilliance",
+    title: "Gukesh - Youthful Brilliance",
     event: "World Cup",
     site: "Khanty-Mansiysk",
     date: "2021.08.14",
@@ -296,7 +296,7 @@ export const fischerGames: FischerGame[] = [
   },
   {
     id: "magnus-endgame",
-    title: "Endgame Mastery",
+    title: "Magnus Carlsen - Endgame Mastery",
     event: "Candidates Tournament",
     site: "Berlin, Germany",
     date: "2018.03.16",
@@ -312,7 +312,7 @@ export const fischerGames: FischerGame[] = [
   },
   {
     id: "levy-computer",
-    title: "Human vs Machine Classic",
+    title: "David Levy vs Computer - Historic Match",
     event: "Levy vs Computer Match",
     site: "Glasgow, Scotland",
     date: "1989.04.15",
