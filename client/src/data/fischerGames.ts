@@ -245,24 +245,7 @@ export const fischerGames: FischerGame[] = [
       { moveIndex: 26, comment: "f5! breaks open the position" },
       { moveIndex: 44, comment: "The attack is decisive - Qh6 threatens unstoppable mate" }
     ]
-  }
-];
-
-export function getFischerGameById(id: string): FischerGame | undefined {
-  return fischerGames.find(game => game.id === id);
-}
-
-export function searchFischerGames(query: string): FischerGame[] {
-  const lowerQuery = query.toLowerCase();
-  return fischerGames.filter(game => 
-    game.title.toLowerCase().includes(lowerQuery) ||
-    game.white.toLowerCase().includes(lowerQuery) ||
-    game.black.toLowerCase().includes(lowerQuery) ||
-    game.event.toLowerCase().includes(lowerQuery) ||
-    game.description.toLowerCase().includes(lowerQuery)
-  );
-}
-
+  },
   {
     id: "tal-immortal",
     title: "The Immortal Game",
@@ -279,7 +262,6 @@ export function searchFischerGames(query: string): FischerGame[] {
       { moveIndex: 30, comment: "A decisive blow - Tal's sacrificial play pays off magnificently" }
     ]
   },
-
   {
     id: "hikaru-london",
     title: "Brilliant Positional Victory",
@@ -296,7 +278,6 @@ export function searchFischerGames(query: string): FischerGame[] {
       { moveIndex: 25, comment: "Dominating position - Aronian's position collapses" }
     ]
   },
-
   {
     id: "gukesh-prodigy",
     title: "Youthful Brilliance",
@@ -313,7 +294,6 @@ export function searchFischerGames(query: string): FischerGame[] {
       { moveIndex: 28, comment: "Brilliant tactics lead to a decisive advantage" }
     ]
   },
-
   {
     id: "magnus-endgame",
     title: "Endgame Mastery",
@@ -330,7 +310,6 @@ export function searchFischerGames(query: string): FischerGame[] {
       { moveIndex: 30, comment: "Flawless endgame technique demonstrates his superiority" }
     ]
   },
-
   {
     id: "levy-computer",
     title: "Human vs Machine Classic",
@@ -348,3 +327,18 @@ export function searchFischerGames(query: string): FischerGame[] {
     ]
   }
 ];
+
+export function getFischerGameById(id: string): FischerGame | undefined {
+  return fischerGames.find(game => game.id === id);
+}
+
+export function searchFischerGames(query: string): FischerGame[] {
+  const lowerQuery = query.toLowerCase();
+  return fischerGames.filter(game => 
+    game.title.toLowerCase().includes(lowerQuery) ||
+    game.white.toLowerCase().includes(lowerQuery) ||
+    game.black.toLowerCase().includes(lowerQuery) ||
+    game.event.toLowerCase().includes(lowerQuery) ||
+    game.description.toLowerCase().includes(lowerQuery)
+  );
+}
