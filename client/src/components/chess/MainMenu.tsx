@@ -14,11 +14,13 @@ import {
   Sun,
   Settings as SettingsIcon,
   HelpCircle,
-  Trophy
+  Trophy,
+  GraduationCap
 } from "lucide-react";
 import { Settings } from "./Settings";
 import { KeyboardHelp } from "./KeyboardHelp";
 import { Achievements } from "./Achievements";
+import { OpeningLearning } from "./OpeningLearning";
 
 const THEME_COLORS = {
   classic: "bg-gradient-to-br from-amber-200 to-amber-700",
@@ -45,6 +47,7 @@ export function MainMenu() {
   const [showSettings, setShowSettings] = useState(false);
   const [showHelp, setShowHelp] = useState(false);
   const [showAchievements, setShowAchievements] = useState(false);
+  const [showLearning, setShowLearning] = useState(false);
   
   const themes: ("classic" | "modern" | "wooden" | "midnight" | "emerald" | "sunset" | "ocean" | "neon" | "lavender" | "forest")[] = ["classic", "modern", "wooden", "midnight", "emerald", "sunset", "ocean", "neon", "lavender", "forest"];
   
@@ -105,6 +108,16 @@ export function MainMenu() {
             >
               <BookOpen className="w-6 h-6 mr-3" />
               Legendary Games
+            </Button>
+          </motion.div>
+
+          <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+            <Button
+              className="w-full h-16 text-lg bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-700 hover:to-indigo-800"
+              onClick={() => setShowLearning(true)}
+            >
+              <GraduationCap className="w-6 h-6 mr-3" />
+              Learn Openings
             </Button>
           </motion.div>
         </Card>
@@ -207,6 +220,7 @@ export function MainMenu() {
           </Card>
         </motion.div>
       )}
+      {showLearning && <OpeningLearning onBack={() => setShowLearning(false)} />}
     </div>
   );
 }

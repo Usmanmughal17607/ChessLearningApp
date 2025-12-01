@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { Chess, Move, Square } from "chess.js";
 import { Difficulty, findBestMove, evaluatePosition, getSuggestedMoves } from "@/lib/chessAI";
 
-export type GameMode = "menu" | "play" | "review" | "ai" | "online";
+export type GameMode = "menu" | "play" | "review" | "ai" | "online" | "learn";
 export type Theme = "classic" | "modern" | "wooden" | "midnight" | "emerald" | "sunset" | "ocean" | "neon" | "lavender" | "forest";
 export type PlayerColor = "w" | "b";
 
