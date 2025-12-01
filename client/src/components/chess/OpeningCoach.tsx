@@ -273,8 +273,8 @@ export function OpeningCoach({ onBack }: OpeningCoachProps) {
           >
             <div className="bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700 rounded-xl p-3 sm:p-4">
               {/* Board */}
-              <div className="bg-gradient-to-br from-slate-900 to-black p-2 rounded-lg mb-4 shadow-2xl">
-                <div className="grid grid-cols-8 gap-0 bg-slate-950 rounded-md overflow-hidden">
+              <div className="bg-gradient-to-br from-slate-900 to-black p-1 sm:p-2 rounded-lg mb-4 shadow-2xl overflow-hidden">
+                <div className="inline-grid gap-0 bg-slate-950 rounded-md overflow-hidden" style={{ gridTemplateColumns: 'repeat(8, minmax(0, 1fr))' }}>
                   {['8', '7', '6', '5', '4', '3', '2', '1'].map((rank) =>
                     ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'].map((file) => {
                       const square = (file + rank) as Square;
@@ -289,26 +289,25 @@ export function OpeningCoach({ onBack }: OpeningCoachProps) {
                       };
 
                       return (
-                        <motion.div
+                        <button
                           key={square}
                           onClick={() => handleSquareClick(square)}
                           className={`
-                            aspect-square flex items-center justify-center text-3xl sm:text-4xl font-bold cursor-pointer transition-all
+                            w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 flex items-center justify-center text-2xl sm:text-3xl md:text-4xl font-bold cursor-pointer transition-all select-none
                             ${isSelected ? 'bg-yellow-400 shadow-lg shadow-yellow-400/50' : 
-                              isLegal ? 'bg-green-500/70 shadow-lg shadow-green-500/30' : 
+                              isLegal ? 'bg-green-500/70' : 
                               isLight ? 'bg-amber-100' : 'bg-amber-700'}
                           `}
-                          whileHover={{ scale: 1.05 }}
                         >
                           {isLegal && !piece && (
-                            <div className="w-2 h-2 sm:w-3 sm:h-3 bg-green-600 rounded-full opacity-80" />
+                            <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 bg-green-600 rounded-full" />
                           )}
                           {piece && (
-                            <span className={piece.color === 'w' ? 'text-white drop-shadow-xl' : 'text-slate-900 drop-shadow-md'}>
+                            <span className={piece.color === 'w' ? 'text-white drop-shadow-lg' : 'text-slate-900 drop-shadow-md'}>
                               {PIECE_SYMBOLS[piece.type.toUpperCase()]}
                             </span>
                           )}
-                        </motion.div>
+                        </button>
                       );
                     })
                   )}
