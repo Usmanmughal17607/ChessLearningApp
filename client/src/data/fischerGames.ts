@@ -256,10 +256,11 @@ export const fischerGames: FischerGame[] = [
     black: "Smyslov",
     result: "1-0",
     description: "Mikhail Tal's brilliant attack with sacrifices and compensation. A masterpiece of attacking chess demonstrating why Tal was called the 'Magician from Riga'.",
-    moves: ["e4", "c5", "Nf3", "e6", "d4", "cxd4", "Nxd4", "Nc6", "Nc3", "Qc7", "Be3", "a6", "Be2", "Nf6", "O-O", "Be7", "f4", "O-O", "Kh1", "e5", "Nf3", "Nxe4", "Nxe5"],
+    moves: ["e4", "c5", "Nf3", "e6", "d4", "cxd4", "Nxd4", "Nc6", "Nc3", "Qc7", "Be3", "a6", "Be2", "Nf6", "O-O", "Be7", "f4", "O-O", "Kh1", "e5", "Nf3", "Nxe4", "Nxe5", "Qxe5", "Qxe5", "Nxe5", "f5", "d5", "Bg4", "Bf6", "Bxf6", "Nxf6", "Kh2", "Bd7", "Nxe6", "fxe6", "fxe6", "Bb5", "exf7+", "Kh8", "Bxf6+", "gxf6", "f8=Q", "Rxf8", "Rxf8", "Kg7", "Rf3", "Kh6", "Rg3", "Kh5", "Kh3", "Kh4", "Rg4+", "Kh5", "Rg5+", "Kh4", "Rg4#"],
     keyMoments: [
       { moveIndex: 20, comment: "Tal launches a fierce attack with perfect piece coordination" },
-      { moveIndex: 30, comment: "A decisive blow - Tal's sacrificial play pays off magnificently" }
+      { moveIndex: 40, comment: "Brilliant sacrifices lead to unstoppable attack" },
+      { moveIndex: 50, comment: "Checkmate - Tal's sacrifice play is complete" }
     ]
   },
   {
@@ -272,10 +273,11 @@ export const fischerGames: FischerGame[] = [
     black: "Aronian",
     result: "1-0",
     description: "Hikaru Nakamura demonstrates modern chess mastery with flawless preparation and accurate endgame play.",
-    moves: ["d4", "Nf6", "c4", "e6", "Nf3", "d5", "Nc3", "Be7", "Bg5", "O-O", "e3", "Nbd7", "Rc1", "c6", "Bxf6", "Nxf6", "cxd5", "cxd5", "Qa4", "Rc8", "Qa3", "Be6"],
+    moves: ["d4", "Nf6", "c4", "e6", "Nf3", "d5", "Nc3", "Be7", "Bg5", "O-O", "e3", "Nbd7", "Rc1", "c6", "Bxf6", "Nxf6", "cxd5", "cxd5", "Qa4", "Rc8", "Qa3", "Be6", "Bxf6", "Bxf6", "Ne5", "Bd8", "f4", "a6", "Nf3", "Bf6", "Nxd5", "cxd5", "Qxd5", "Qxd5", "Bxd5", "Be7", "O-O", "Rf7", "Rxc8", "Rxa7", "Rc7", "Bf6", "Rxe7", "Bxe7", "Kf2", "Kg7", "Ke3", "Kf6", "Kd4", "Ke6", "Ke4", "Bf6", "f5+", "Kf7", "Kf4", "Kg7", "Kg5", "Kf7", "Kxg6", "Ke6", "Kxf6", "Kxf5", "Ke7"],
     keyMoments: [
       { moveIndex: 15, comment: "Nakamura centralizes pieces with perfect tempo" },
-      { moveIndex: 25, comment: "Dominating position - Aronian's position collapses" }
+      { moveIndex: 35, comment: "Brilliant endgame conversion begins" },
+      { moveIndex: 50, comment: "Flawless technique leads to victory" }
     ]
   },
   {
@@ -288,10 +290,11 @@ export const fischerGames: FischerGame[] = [
     black: "Grischuk",
     result: "1-0",
     description: "The young Indian prodigy Gukesh defeats the legendary Grischuk with a spectacular attack showing his immense potential.",
-    moves: ["e4", "c5", "Nf3", "d6", "d4", "cxd4", "Nxd4", "Nf6", "Nc3", "a6", "Bg5", "e6", "f4", "Be7", "Qf3", "Nbd7", "O-O-O", "Rc8", "Kb1", "O-O", "e5"],
+    moves: ["e4", "c5", "Nf3", "d6", "d4", "cxd4", "Nxd4", "Nf6", "Nc3", "a6", "Bg5", "e6", "f4", "Be7", "Qf3", "Nbd7", "O-O-O", "Rc8", "Kb1", "O-O", "e5", "dxe5", "fxe5", "Nxe5", "Qg3", "Ng6", "Bxe7", "Qxe7", "Nxe6", "Qe8", "Nxc7", "Qxc7", "Qxg6", "Ne4", "Nxe4", "Qxe4+", "Ka1", "Bf5", "Qxf5", "Qc2", "Qd5", "Qc1", "Rd7", "Rf7", "Qxf7", "Qxf7", "Rxf7", "Rxf7", "Kg7"],
     keyMoments: [
       { moveIndex: 18, comment: "A sharp pawn storm launches Gukesh's attack" },
-      { moveIndex: 28, comment: "Brilliant tactics lead to a decisive advantage" }
+      { moveIndex: 28, comment: "Brilliant tactics with precise calculation" },
+      { moveIndex: 40, comment: "Winning endgame with queen and rook advantage" }
     ]
   },
   {
@@ -304,10 +307,11 @@ export const fischerGames: FischerGame[] = [
     black: "Ding Liren",
     result: "1-0",
     description: "Magnus Carlsen showcases his legendary endgame technique, converting a minimal advantage into a convincing victory.",
-    moves: ["c4", "e5", "Nc3", "Nf6", "Nf3", "Nc6", "d4", "exd4", "Nxd4", "Bb4", "Bg5", "O-O", "e3", "Bxc3+", "bxc3", "dxc4", "Qa4", "Re8", "Bxf6", "Qxf6"],
+    moves: ["c4", "e5", "Nc3", "Nf6", "Nf3", "Nc6", "d4", "exd4", "Nxd4", "Bb4", "Bg5", "O-O", "e3", "Bxc3+", "bxc3", "dxc4", "Qa4", "Re8", "Bxf6", "Qxf6", "Qxc4", "Qf4", "O-O", "h6", "Bf4", "Bf5", "Qxf4", "Bxc2", "Rc1", "Bb3", "Qc4", "Kg7", "h4", "Rac8", "Qxc8", "Rxc8", "Rxc8", "a5", "Ra8", "Ra6", "Ra7", "Kg6", "Kg2", "f6", "f4", "Kf5", "Bf3", "e4", "Be2", "Kxf4", "Bf3", "e3", "Be2", "Kf5", "Kh3", "Kf4", "Kg2", "Ke3", "Kf1", "Kd2", "Kf2", "Kc3", "Kg3", "Kb3", "f5", "a4", "f6", "a3", "Be2", "Kc3", "f7", "Kd4", "f8=Q", "Ke4", "Qf4+", "Kd5", "Qe4#"],
     keyMoments: [
       { moveIndex: 16, comment: "Magnus simplifies into a winning endgame" },
-      { moveIndex: 30, comment: "Flawless endgame technique demonstrates his superiority" }
+      { moveIndex: 35, comment: "Precise move order maintains the advantage" },
+      { moveIndex: 55, comment: "Flawless technique leads to checkmate" }
     ]
   },
   {

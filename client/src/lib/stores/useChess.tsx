@@ -28,6 +28,7 @@ interface ChessState {
   evaluation: number;
   suggestedMoves: { move: Move; evaluation: number }[];
   showEvaluation: boolean;
+  aiGameStarted: boolean;
   
   gameCode: string | null;
   isOnline: boolean;
@@ -141,6 +142,7 @@ export const useChess = create<ChessState>((set, get) => ({
   evaluation: 0,
   suggestedMoves: [],
   showEvaluation: true,
+  aiGameStarted: false,
   
   gameCode: null,
   isOnline: false,
@@ -165,7 +167,8 @@ export const useChess = create<ChessState>((set, get) => ({
         currentReviewGame: null,
         reviewMoveIndex: -1,
         isAutoPlaying: false,
-        autoPlayIntervalId: null
+        autoPlayIntervalId: null,
+        aiGameStarted: false
       });
     } else if (mode === "menu") {
       set({ 
@@ -423,6 +426,7 @@ export const useChess = create<ChessState>((set, get) => ({
     const { playerColor } = get();
     
     set({
+      aiGameStarted: true,
       isAIThinking: false,
       evaluation: 0,
       suggestedMoves: []

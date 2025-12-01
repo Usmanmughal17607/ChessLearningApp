@@ -96,10 +96,10 @@ function OnlineGame() {
 }
 
 export function ChessGame() {
-  const { gameMode, game } = useChess();
+  const { gameMode, aiGameStarted } = useChess();
   
-  const isAISetup = gameMode === "ai" && game.fen() === "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1" && game.history().length === 0;
-  const isOnlineSetup = gameMode === "online" && game.history().length === 0;
+  const isAISetup = gameMode === "ai" && !aiGameStarted;
+  const isOnlineSetup = gameMode === "online";
   
   return (
     <AnimatePresence mode="wait">
