@@ -305,7 +305,7 @@ export function OpeningCoach({ onBack }: OpeningCoachProps) {
 
   // Statistics Screen
   if (gameMode === 'stats') {
-    const topStats = filteredOpenings.map(o => ({ opening: o, stats: getStats(o.id) })).sort((a, b) => b.stats.timesCompleted - a.stats.timesCompleted);
+    const topStats = filteredOpenings.map(o => ({ opening: o, stats: getStats(o.id) })).sort((a, b) => (b.stats?.timesCompleted ?? 0) - (a.stats?.timesCompleted ?? 0));
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-950 via-purple-950 to-slate-950 text-white p-4 sm:p-6">
         <div className="w-full max-w-4xl mx-auto">
@@ -323,25 +323,28 @@ export function OpeningCoach({ onBack }: OpeningCoachProps) {
             </h1>
           </div>
           <div className="space-y-3">
-            {topStats.map(({ opening, stats }) => (
-              <motion.div
-                key={opening.id}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                className="bg-slate-800 border border-slate-700 p-4 rounded-lg"
-              >
-                <div className="flex justify-between items-center">
-                  <div>
-                    <h3 className="font-bold text-amber-400">{opening.name}</h3>
-                    <p className="text-xs text-slate-400">Completed: {stats.timesCompleted} • Played: {stats.timesPlayed} • Perfect: {stats.perfectMoves}</p>
+            {topStats.map(({ opening, stats }) => {
+              const s = stats ?? { timesCompleted: 0, timesPlayed: 0, perfectMoves: 0 };
+              return (
+                <motion.div
+                  key={opening.id}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  className="bg-slate-800 border border-slate-700 p-4 rounded-lg"
+                >
+                  <div className="flex justify-between items-center">
+                    <div>
+                      <h3 className="font-bold text-amber-400">{opening.name}</h3>
+                      <p className="text-xs text-slate-400">Completed: {s.timesCompleted} • Played: {s.timesPlayed} • Perfect: {s.perfectMoves}</p>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-2xl font-bold text-green-400">{s.timesCompleted > 0 ? Math.round((s.timesCompleted / s.timesPlayed) * 100) : 0}%</div>
+                      <p className="text-xs text-slate-400">Success Rate</p>
+                    </div>
                   </div>
-                  <div className="text-right">
-                    <div className="text-2xl font-bold text-green-400">{stats.timesCompleted > 0 ? Math.round((stats.timesCompleted / stats.timesPlayed) * 100) : 0}%</div>
-                    <p className="text-xs text-slate-400">Success Rate</p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </div>
@@ -577,6 +580,15 @@ export function OpeningCoach({ onBack }: OpeningCoachProps) {
                   <RotateCcw className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
                   <span className="hidden sm:inline">Reset</span>
                 </Button>
+                <Button 
+                  onClick={() => { if (moveCount >= currentOpening.sampleMoves.length) { handleGameComplete(); } }}
+                  disabled={moveCount < currentOpening.sampleMoves.length}
+                  className="flex-1 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 disabled:opacity-50 text-sm h-9"
+                >
+                  <Brain className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
+                  <span className="hidden sm:inline">Analyze</span>
+                  <span className="sm:hidden">Analyze</span>
+                </Button>
               </div>
           </motion.div>
 
@@ -655,7 +667,38 @@ export function OpeningCoach({ onBack }: OpeningCoachProps) {
             </div>
           </motion.div>
 
-          {/* Move History - Full Width Below */}
+          {/* Analysis & Move History - Full Width Below */}
+          {moveCount >= currentOpening.sampleMoves.length && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="bg-gradient-to-br from-emerald-900/30 to-teal-900/30 border border-emerald-500/30 rounded-xl p-4"
+            >
+              <h3 className="font-bold text-emerald-400 mb-3 flex items-center gap-2">
+                <Brain className="w-5 h-5" />
+                Game Analysis & Review
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                <div className="bg-slate-800/50 p-3 rounded-lg">
+                  <p className="text-slate-300 font-semibold mb-2">Opening Mastered! 🎉</p>
+                  <div className="text-xs text-slate-400 space-y-1">
+                    <p>✓ Moves Played: {currentOpening.sampleMoves.length}</p>
+                    <p>✓ Mistakes: {mistakesCount}</p>
+                    <p>✓ Accuracy: {mistakesCount === 0 ? '100%' : Math.round(((currentOpening.sampleMoves.length - mistakesCount) / currentOpening.sampleMoves.length) * 100) + '%'}</p>
+                  </div>
+                </div>
+                <div className="bg-slate-800/50 p-3 rounded-lg">
+                  <p className="text-slate-300 font-semibold mb-2">Key Concepts</p>
+                  <ul className="text-xs text-slate-400 space-y-1">
+                    {currentOpening.keyIdeas.slice(0, 2).map((idea, i) => (
+                      <li key={i}>• {idea}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </motion.div>
+          )}
+          
           <div className="bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700 rounded-xl p-4">
             <h3 className="font-bold text-amber-400 mb-3">Move Sequence</h3>
             <div className="bg-slate-900/50 rounded-lg p-3 max-h-40 overflow-y-auto">
