@@ -14,6 +14,7 @@ export interface OpeningInfo {
   keyIdeas: string[];
   history: string;
   sampleMoves: string[];
+  keyMoments?: { moveIndex: number; comment: string }[];
 }
 
 export const openingsLibrary: OpeningInfo[] = [

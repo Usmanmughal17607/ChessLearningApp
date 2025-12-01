@@ -21,6 +21,7 @@ import { Settings } from "./Settings";
 import { KeyboardHelp } from "./KeyboardHelp";
 import { Achievements } from "./Achievements";
 import { OpeningLearning } from "./OpeningLearning";
+import { OpeningCoach } from "./OpeningCoach";
 
 const THEME_COLORS = {
   classic: "bg-gradient-to-br from-amber-200 to-amber-700",
@@ -48,6 +49,7 @@ export function MainMenu() {
   const [showHelp, setShowHelp] = useState(false);
   const [showAchievements, setShowAchievements] = useState(false);
   const [showLearning, setShowLearning] = useState(false);
+  const [showCoach, setShowCoach] = useState(false);
   
   const themes: ("classic" | "modern" | "wooden" | "midnight" | "emerald" | "sunset" | "ocean" | "neon" | "lavender" | "forest")[] = ["classic", "modern", "wooden", "midnight", "emerald", "sunset", "ocean", "neon", "lavender", "forest"];
   
@@ -114,10 +116,20 @@ export function MainMenu() {
           <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
             <Button
               className="w-full h-16 text-lg bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-700 hover:to-indigo-800"
-              onClick={() => setShowLearning(true)}
+              onClick={() => setShowCoach(true)}
             >
               <GraduationCap className="w-6 h-6 mr-3" />
-              Learn Openings
+              Opening Coach (AI)
+            </Button>
+          </motion.div>
+
+          <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+            <Button
+              className="w-full h-16 text-lg bg-gradient-to-r from-cyan-600 to-cyan-700 hover:from-cyan-700 hover:to-cyan-800"
+              onClick={() => setShowLearning(true)}
+            >
+              <BookOpen className="w-6 h-6 mr-3" />
+              Opening Library
             </Button>
           </motion.div>
         </Card>
@@ -221,6 +233,7 @@ export function MainMenu() {
         </motion.div>
       )}
       {showLearning && <OpeningLearning onBack={() => setShowLearning(false)} />}
+      {showCoach && <OpeningCoach onBack={() => setShowCoach(false)} />}
     </div>
   );
 }
