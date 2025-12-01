@@ -42,6 +42,54 @@ const THEMES = {
     legal: "bg-cyan-400/50",
     lastMove: "bg-indigo-400/40",
     check: "bg-rose-500/60"
+  },
+  emerald: {
+    light: "bg-emerald-100",
+    dark: "bg-emerald-700",
+    selected: "bg-emerald-400",
+    legal: "bg-teal-400/50",
+    lastMove: "bg-emerald-300/50",
+    check: "bg-red-500/60"
+  },
+  sunset: {
+    light: "bg-rose-100",
+    dark: "bg-orange-700",
+    selected: "bg-yellow-400",
+    legal: "bg-amber-400/50",
+    lastMove: "bg-rose-300/50",
+    check: "bg-red-600/60"
+  },
+  ocean: {
+    light: "bg-cyan-100",
+    dark: "bg-blue-800",
+    selected: "bg-sky-400",
+    legal: "bg-cyan-400/50",
+    lastMove: "bg-blue-300/50",
+    check: "bg-red-500/60"
+  },
+  neon: {
+    light: "bg-lime-100",
+    dark: "bg-gray-900 border-2 border-neon-500",
+    selected: "bg-pink-500",
+    legal: "bg-cyan-400/70",
+    lastMove: "bg-fuchsia-400/60",
+    check: "bg-red-600/80"
+  },
+  lavender: {
+    light: "bg-purple-100",
+    dark: "bg-purple-600",
+    selected: "bg-pink-400",
+    legal: "bg-purple-400/50",
+    lastMove: "bg-purple-300/50",
+    check: "bg-red-500/60"
+  },
+  forest: {
+    light: "bg-green-100",
+    dark: "bg-green-800",
+    selected: "bg-lime-400",
+    legal: "bg-green-400/50",
+    lastMove: "bg-green-300/50",
+    check: "bg-red-600/60"
   }
 };
 

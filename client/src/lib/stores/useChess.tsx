@@ -3,7 +3,7 @@ import { Chess, Move, Square } from "chess.js";
 import { Difficulty, findBestMove, evaluatePosition, getSuggestedMoves } from "@/lib/chessAI";
 
 export type GameMode = "menu" | "play" | "review" | "ai";
-export type Theme = "classic" | "modern" | "wooden" | "midnight";
+export type Theme = "classic" | "modern" | "wooden" | "midnight" | "emerald" | "sunset" | "ocean" | "neon" | "lavender" | "forest";
 export type PlayerColor = "w" | "b";
 
 interface ChessState {

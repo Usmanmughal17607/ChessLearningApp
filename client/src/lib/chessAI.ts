@@ -240,9 +240,9 @@ export function getSuggestedMoves(game: Chess, count: number = 3): { move: Move;
   const isMaximizing = game.turn() === 'w';
   
   for (const move of moves) {
-    game.move(move);
-    const evaluation = minimax(game, 2, -Infinity, Infinity, !isMaximizing);
-    game.undo();
+    const gameCopy = new Chess(game.fen());
+    gameCopy.move(move);
+    const evaluation = minimax(gameCopy, 2, -Infinity, Infinity, !isMaximizing);
     
     evaluatedMoves.push({ move, evaluation });
   }

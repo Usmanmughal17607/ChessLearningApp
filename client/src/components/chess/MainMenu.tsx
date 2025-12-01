@@ -16,7 +16,13 @@ const THEME_COLORS = {
   classic: "bg-gradient-to-br from-amber-200 to-amber-700",
   modern: "bg-gradient-to-br from-slate-300 to-slate-700",
   wooden: "bg-gradient-to-br from-orange-300 to-amber-900",
-  midnight: "bg-gradient-to-br from-indigo-400 to-indigo-950"
+  midnight: "bg-gradient-to-br from-indigo-400 to-indigo-950",
+  emerald: "bg-gradient-to-br from-emerald-200 to-emerald-700",
+  sunset: "bg-gradient-to-br from-rose-200 to-orange-700",
+  ocean: "bg-gradient-to-br from-cyan-200 to-blue-800",
+  neon: "bg-gradient-to-br from-lime-200 to-gray-900",
+  lavender: "bg-gradient-to-br from-purple-200 to-purple-600",
+  forest: "bg-gradient-to-br from-green-200 to-green-800"
 };
 
 export function MainMenu() {
@@ -28,7 +34,7 @@ export function MainMenu() {
     toggleDarkMode 
   } = useChess();
   
-  const themes: ("classic" | "modern" | "wooden" | "midnight")[] = ["classic", "modern", "wooden", "midnight"];
+  const themes: ("classic" | "modern" | "wooden" | "midnight" | "emerald" | "sunset" | "ocean" | "neon" | "lavender" | "forest")[] = ["classic", "modern", "wooden", "midnight", "emerald", "sunset", "ocean", "neon", "lavender", "forest"];
   
   return (
     <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
@@ -90,14 +96,15 @@ export function MainMenu() {
               </div>
             </div>
             
-            <div className="flex gap-2">
+            <div className="grid grid-cols-5 gap-2">
               {themes.map((t) => (
-                <button
+                <motion.button
                   key={t}
+                  whileHover={{ scale: 1.05 }}
                   onClick={() => setTheme(t)}
                   className={`
-                    flex-1 h-12 rounded-lg ${THEME_COLORS[t]}
-                    ${theme === t ? "ring-2 ring-white ring-offset-2 ring-offset-gray-800" : "opacity-60 hover:opacity-100"}
+                    h-12 rounded-lg ${THEME_COLORS[t]}
+                    ${theme === t ? "ring-2 ring-white ring-offset-2 ring-offset-gray-800 scale-110" : "opacity-60 hover:opacity-100"}
                     transition-all
                   `}
                   title={t.charAt(0).toUpperCase() + t.slice(1)}
