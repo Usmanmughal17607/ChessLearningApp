@@ -451,30 +451,30 @@ export function OpeningCoach({ onBack }: OpeningCoachProps) {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-purple-950 to-slate-950 text-white p-3 sm:p-4 md:p-6">
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-purple-950 to-slate-950 text-white p-2 xs:p-3 sm:p-4 md:p-6">
       <div className="w-full max-w-7xl mx-auto">
         <button
           onClick={() => { setSelectedOpeningId(null); setGameMode('select'); }}
-          className="flex items-center gap-2 mb-4 sm:mb-6 px-3 sm:px-4 py-2 rounded-lg hover:bg-white/10 transition-colors text-slate-300 hover:text-white text-sm sm:text-base"
+          className="flex items-center gap-2 mb-3 xs:mb-4 sm:mb-6 px-2 xs:px-3 sm:px-4 py-1.5 xs:py-2 rounded-lg hover:bg-white/10 transition-colors text-slate-300 hover:text-white text-xs xs:text-sm sm:text-base"
         >
-          <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+          <ChevronLeft className="w-3 h-3 xs:w-4 xs:h-4 sm:w-5 sm:h-5" />
           Back
         </button>
 
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="space-y-6"
+          className="space-y-4 xs:space-y-5 sm:space-y-6"
         >
           {/* Center - Chessboard (Full Width) */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700 rounded-xl p-4 sm:p-6 flex justify-center"
+            className="bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700 rounded-lg xs:rounded-xl p-2 xs:p-3 sm:p-6 flex flex-col items-center overflow-x-auto"
           >
-              {/* Board */}
-              <div className="bg-gradient-to-br from-slate-900 to-black p-2 sm:p-3 rounded-lg mb-6 shadow-2xl overflow-hidden">
-                <div className="grid gap-0 bg-slate-950 rounded-md overflow-hidden" style={{ gridTemplateColumns: 'repeat(8, 1fr)', maxWidth: 'fit-content' }}>
+              {/* Board Container */}
+              <div className="bg-gradient-to-br from-slate-900 to-black p-1 xs:p-2 sm:p-3 rounded-lg shadow-2xl overflow-hidden flex-shrink-0">
+                <div className="grid gap-0 bg-slate-950 rounded-md overflow-hidden" style={{ gridTemplateColumns: 'repeat(8, 1fr)' }}>
                   {['8', '7', '6', '5', '4', '3', '2', '1'].map((rank) =>
                     ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'].map((file) => {
                       const square = (file + rank) as Square;
@@ -493,14 +493,14 @@ export function OpeningCoach({ onBack }: OpeningCoachProps) {
                           key={square}
                           onClick={() => handleSquareClick(square)}
                           className={`
-                            w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 flex items-center justify-center text-4xl sm:text-5xl md:text-6xl font-bold cursor-pointer transition-all select-none
+                            w-12 h-12 xs:w-14 xs:h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 flex items-center justify-center text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold cursor-pointer transition-all select-none
                             ${isSelected ? 'bg-yellow-400 shadow-lg shadow-yellow-400/50' : 
                               isLegal ? 'bg-green-500/70' : 
                               isLight ? 'bg-amber-100' : 'bg-amber-700'}
                           `}
                         >
                           {isLegal && !piece && (
-                            <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 bg-green-600 rounded-full" />
+                            <div className="w-1 h-1 xs:w-1.5 xs:h-1.5 sm:w-2 sm:h-2 bg-green-600 rounded-full" />
                           )}
                           {piece && (
                             <span className={piece.color === 'w' ? 'text-white drop-shadow-lg' : 'text-slate-900 drop-shadow-md'}>
@@ -519,7 +519,7 @@ export function OpeningCoach({ onBack }: OpeningCoachProps) {
                 <motion.div
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className={`p-3 rounded-lg text-center font-semibold mb-3 text-sm ${
+                  className={`p-2 xs:p-2.5 sm:p-3 rounded-lg text-center font-semibold mt-2 xs:mt-3 sm:mt-4 text-xs xs:text-sm w-full ${
                     feedback.includes('✨')
                       ? 'bg-green-900/60 text-green-300 border border-green-500/30'
                       : 'bg-blue-900/60 text-blue-300 border border-blue-500/30'
@@ -534,10 +534,10 @@ export function OpeningCoach({ onBack }: OpeningCoachProps) {
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="bg-gradient-to-r from-blue-600/30 to-cyan-600/30 border border-blue-500/30 p-3 rounded-lg mb-3 text-center"
+                  className="bg-gradient-to-r from-blue-600/30 to-cyan-600/30 border border-blue-500/30 p-2 xs:p-2.5 sm:p-3 rounded-lg mt-2 xs:mt-3 sm:mt-4 text-center w-full"
                 >
                   <div className="text-xs text-blue-200 font-semibold">💡 Next Move</div>
-                  <div className="text-lg sm:text-xl font-bold text-blue-300 mt-1">{currentOpening.sampleMoves[moveCount]}</div>
+                  <div className="text-base xs:text-lg sm:text-xl font-bold text-blue-300 mt-1">{currentOpening.sampleMoves[moveCount]}</div>
                 </motion.div>
               )}
 
@@ -546,48 +546,45 @@ export function OpeningCoach({ onBack }: OpeningCoachProps) {
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="bg-gradient-to-r from-emerald-600/30 to-teal-600/30 border border-emerald-500/30 p-3 rounded-lg mb-3 text-center"
+                  className="bg-gradient-to-r from-emerald-600/30 to-teal-600/30 border border-emerald-500/30 p-2 xs:p-2.5 sm:p-3 rounded-lg mt-2 xs:mt-3 sm:mt-4 text-center w-full"
                 >
-                  <div className="text-sm text-emerald-300 font-bold">🎉 Opening Mastered!</div>
+                  <div className="text-xs xs:text-sm text-emerald-300 font-bold">🎉 Opening Mastered!</div>
                 </motion.div>
               )}
 
-              {/* Controls */}
-              <div className="flex gap-2">
+              {/* Controls - Grid for better mobile layout */}
+              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-1.5 xs:gap-2 sm:gap-2 mt-2 xs:mt-3 sm:mt-4 w-full">
                 <Button 
                   onClick={getHint}
                   disabled={moveCount >= currentOpening.sampleMoves.length || game?.turn() !== 'w'}
-                  className="flex-1 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 disabled:opacity-50 text-sm h-9"
+                  className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 disabled:opacity-50 text-xs xs:text-xs sm:text-sm h-7 xs:h-8 sm:h-9 px-1.5 xs:px-2 sm:px-3"
                 >
-                  <Zap className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
-                  <span className="hidden sm:inline">Hint</span>
-                  <span className="sm:hidden">Hint</span>
+                  <Zap className="w-3 h-3 mr-0.5" />
+                  <span className="hidden xs:inline">Hint</span>
                 </Button>
                 <Button 
                   onClick={playMoveForUser}
                   disabled={moveCount >= currentOpening.sampleMoves.length || game?.turn() !== 'w'}
-                  className="flex-1 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 disabled:opacity-50 text-sm h-9"
+                  className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 disabled:opacity-50 text-xs xs:text-xs sm:text-sm h-7 xs:h-8 sm:h-9 px-1.5 xs:px-2 sm:px-3"
                 >
-                  <Zap className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
-                  <span className="hidden sm:inline">Play Move</span>
-                  <span className="sm:hidden">Play</span>
+                  <Zap className="w-3 h-3 mr-0.5" />
+                  <span className="hidden xs:inline">Play</span>
                 </Button>
                 <Button 
                   onClick={resetGame}
                   variant="outline" 
-                  className="flex-1 border-slate-600 hover:bg-white/10 text-sm h-9"
+                  className="border-slate-600 hover:bg-white/10 text-xs xs:text-xs sm:text-sm h-7 xs:h-8 sm:h-9 px-1.5 xs:px-2 sm:px-3"
                 >
-                  <RotateCcw className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
-                  <span className="hidden sm:inline">Reset</span>
+                  <RotateCcw className="w-3 h-3 mr-0.5" />
+                  <span className="hidden xs:inline">Reset</span>
                 </Button>
                 <Button 
                   onClick={() => { if (moveCount >= currentOpening.sampleMoves.length) { handleGameComplete(); } }}
                   disabled={moveCount < currentOpening.sampleMoves.length}
-                  className="flex-1 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 disabled:opacity-50 text-sm h-9"
+                  className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 disabled:opacity-50 text-xs xs:text-xs sm:text-sm h-7 xs:h-8 sm:h-9 px-1.5 xs:px-2 sm:px-3"
                 >
-                  <Brain className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
-                  <span className="hidden sm:inline">Analyze</span>
-                  <span className="sm:hidden">Analyze</span>
+                  <Brain className="w-3 h-3 mr-0.5" />
+                  <span className="hidden xs:inline">Analyze</span>
                 </Button>
               </div>
           </motion.div>
@@ -596,21 +593,21 @@ export function OpeningCoach({ onBack }: OpeningCoachProps) {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6"
+            className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2 xs:gap-3 sm:gap-4"
           >
             {/* Title Card */}
-            <div className="bg-gradient-to-br from-amber-600/20 to-orange-600/20 border border-amber-500/30 rounded-xl p-4">
-              <h2 className="text-2xl font-bold text-amber-400 mb-2">{currentOpening.name}</h2>
-              <p className="text-xs text-slate-300">{currentOpening.description}</p>
+            <div className="bg-gradient-to-br from-amber-600/20 to-orange-600/20 border border-amber-500/30 rounded-lg xs:rounded-lg sm:rounded-xl p-2.5 xs:p-3 sm:p-4">
+              <h2 className="text-lg xs:text-xl sm:text-2xl font-bold text-amber-400 mb-1">{currentOpening.name}</h2>
+              <p className="text-xs text-slate-300 line-clamp-2">{currentOpening.description}</p>
             </div>
 
             {/* Progress */}
-            <div className="bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700 rounded-xl p-4">
-              <div className="text-xs text-slate-300 font-semibold mb-2">Progress</div>
-              <div className="text-3xl font-bold text-amber-400 mb-2">
+            <div className="bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700 rounded-lg xs:rounded-lg sm:rounded-xl p-2.5 xs:p-3 sm:p-4">
+              <div className="text-xs text-slate-300 font-semibold mb-1.5">Progress</div>
+              <div className="text-2xl xs:text-3xl sm:text-3xl font-bold text-amber-400 mb-1.5">
                 {moveCount}/{currentOpening.sampleMoves.length}
               </div>
-              <div className="w-full bg-slate-700 rounded-full h-2 overflow-hidden">
+              <div className="w-full bg-slate-700 rounded-full h-1.5 overflow-hidden">
                 <motion.div
                   className="bg-gradient-to-r from-amber-500 to-orange-500 h-full"
                   initial={{ width: 0 }}
@@ -620,41 +617,41 @@ export function OpeningCoach({ onBack }: OpeningCoachProps) {
               </div>
             </div>
             {/* Key Ideas */}
-            <div className="bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700 rounded-xl p-4">
-              <h3 className="font-bold text-amber-400 mb-3 flex items-center gap-2 text-sm">
-                <Flame className="w-4 h-4" />
+            <div className="bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700 rounded-lg xs:rounded-lg sm:rounded-xl p-2.5 xs:p-3 sm:p-4">
+              <h3 className="font-bold text-amber-400 mb-2 flex items-center gap-1.5 text-xs sm:text-sm">
+                <Flame className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 Key Ideas
               </h3>
-              <ul className="space-y-2">
+              <ul className="space-y-1">
                 {currentOpening.keyIdeas.slice(0, 2).map((idea, i) => (
-                  <li key={i} className="flex gap-2 text-xs text-slate-300">
-                    <span className="text-amber-500">•</span>
-                    <span>{idea}</span>
+                  <li key={i} className="flex gap-1.5 text-xs text-slate-300">
+                    <span className="text-amber-500 flex-shrink-0">•</span>
+                    <span className="line-clamp-2">{idea}</span>
                   </li>
                 ))}
               </ul>
             </div>
 
             {/* Masters */}
-            <div className="bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700 rounded-xl p-4">
-              <h3 className="font-bold text-amber-400 mb-3 flex items-center gap-2 text-sm">
-                <Crown className="w-4 h-4" />
+            <div className="bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700 rounded-lg xs:rounded-lg sm:rounded-xl p-2.5 xs:p-3 sm:p-4">
+              <h3 className="font-bold text-amber-400 mb-2 flex items-center gap-1.5 text-xs sm:text-sm">
+                <Crown className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 Masters
               </h3>
-              <div className="space-y-2">
+              <div className="space-y-1">
                 {currentOpening.famousGMs.slice(0, 2).map((gm, i) => (
                   <div key={i} className="text-xs">
-                    <div className="text-amber-300 font-semibold">{gm.name}</div>
-                    <div className="text-slate-400">{gm.century}</div>
+                    <div className="text-amber-300 font-semibold line-clamp-1">{gm.name}</div>
+                    <div className="text-slate-400 text-xs">{gm.century}</div>
                   </div>
                 ))}
               </div>
             </div>
 
             {/* Status */}
-            <div className="bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700 rounded-xl p-4">
-              <h3 className="font-bold text-amber-400 mb-3 text-sm">Game Status</h3>
-              <div className="space-y-2 text-xs">
+            <div className="bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700 rounded-lg xs:rounded-lg sm:rounded-xl p-2.5 xs:p-3 sm:p-4 xs:col-span-2 sm:col-span-2 lg:col-span-1">
+              <h3 className="font-bold text-amber-400 mb-2 text-xs sm:text-sm">Game Status</h3>
+              <div className="space-y-1 text-xs">
                 <div className="flex justify-between">
                   <span className="text-slate-300">Turn:</span>
                   <span className="font-semibold">{game?.turn() === 'w' ? '⚪ You' : '🤖 AI'}</span>
@@ -672,26 +669,26 @@ export function OpeningCoach({ onBack }: OpeningCoachProps) {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="bg-gradient-to-br from-emerald-900/30 to-teal-900/30 border border-emerald-500/30 rounded-xl p-4"
+              className="bg-gradient-to-br from-emerald-900/30 to-teal-900/30 border border-emerald-500/30 rounded-lg xs:rounded-lg sm:rounded-xl p-2.5 xs:p-3 sm:p-4"
             >
-              <h3 className="font-bold text-emerald-400 mb-3 flex items-center gap-2">
-                <Brain className="w-5 h-5" />
+              <h3 className="font-bold text-emerald-400 mb-2 xs:mb-3 flex items-center gap-1.5 text-xs sm:text-sm">
+                <Brain className="w-4 h-4 sm:w-5 sm:h-5" />
                 Game Analysis & Review
               </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                <div className="bg-slate-800/50 p-3 rounded-lg">
-                  <p className="text-slate-300 font-semibold mb-2">Opening Mastered! 🎉</p>
-                  <div className="text-xs text-slate-400 space-y-1">
+              <div className="grid grid-cols-1 xs:grid-cols-2 gap-2 xs:gap-3 text-xs xs:text-sm">
+                <div className="bg-slate-800/50 p-2.5 xs:p-3 rounded-lg">
+                  <p className="text-slate-300 font-semibold mb-1.5 text-xs xs:text-sm">Opening Mastered! 🎉</p>
+                  <div className="text-xs text-slate-400 space-y-0.5">
                     <p>✓ Moves Played: {currentOpening.sampleMoves.length}</p>
                     <p>✓ Mistakes: {mistakesCount}</p>
                     <p>✓ Accuracy: {mistakesCount === 0 ? '100%' : Math.round(((currentOpening.sampleMoves.length - mistakesCount) / currentOpening.sampleMoves.length) * 100) + '%'}</p>
                   </div>
                 </div>
-                <div className="bg-slate-800/50 p-3 rounded-lg">
-                  <p className="text-slate-300 font-semibold mb-2">Key Concepts</p>
-                  <ul className="text-xs text-slate-400 space-y-1">
+                <div className="bg-slate-800/50 p-2.5 xs:p-3 rounded-lg">
+                  <p className="text-slate-300 font-semibold mb-1.5 text-xs xs:text-sm">Key Concepts</p>
+                  <ul className="text-xs text-slate-400 space-y-0.5">
                     {currentOpening.keyIdeas.slice(0, 2).map((idea, i) => (
-                      <li key={i}>• {idea}</li>
+                      <li key={i} className="line-clamp-2">• {idea}</li>
                     ))}
                   </ul>
                 </div>
@@ -699,13 +696,13 @@ export function OpeningCoach({ onBack }: OpeningCoachProps) {
             </motion.div>
           )}
           
-          <div className="bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700 rounded-xl p-4">
-            <h3 className="font-bold text-amber-400 mb-3">Move Sequence</h3>
-            <div className="bg-slate-900/50 rounded-lg p-3 max-h-40 overflow-y-auto">
-              <div className="space-y-1 text-sm font-mono">
+          <div className="bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700 rounded-lg xs:rounded-lg sm:rounded-xl p-2.5 xs:p-3 sm:p-4">
+            <h3 className="font-bold text-amber-400 mb-2 xs:mb-3 text-xs sm:text-sm">Move Sequence</h3>
+            <div className="bg-slate-900/50 rounded-lg p-2 xs:p-3 max-h-32 xs:max-h-40 overflow-y-auto">
+              <div className="space-y-0.5 text-xs xs:text-sm font-mono">
                 {currentOpening.sampleMoves.map((move, idx) => (
-                  <span key={idx} className={`inline-block mr-3 ${
-                    idx === moveCount ? 'bg-amber-600/60 text-amber-200 font-bold px-2 py-1 rounded' : 
+                  <span key={idx} className={`inline-block mr-2 xs:mr-3 ${
+                    idx === moveCount ? 'bg-amber-600/60 text-amber-200 font-bold px-1.5 xs:px-2 py-0.5 xs:py-1 rounded' : 
                     idx < moveCount ? 'text-slate-300' : 
                     'text-slate-500'
                   }`}>
