@@ -152,7 +152,7 @@ export const useChess = create<ChessState>((set, get) => ({
       clearInterval(autoPlayIntervalId);
     }
     
-    if (mode === "play") {
+    if (mode === "play" || mode === "ai" || mode === "online") {
       const newGame = new Chess();
       set({ 
         gameMode: mode, 
@@ -421,20 +421,8 @@ export const useChess = create<ChessState>((set, get) => ({
   
   startAIGame: () => {
     const { playerColor } = get();
-    const newGame = new Chess();
     
     set({
-      game: newGame,
-      gameMode: "ai",
-      moveHistory: [],
-      lastMove: null,
-      selectedSquare: null,
-      legalMoves: [],
-      capturedPieces: { white: [], black: [] },
-      currentReviewGame: null,
-      reviewMoveIndex: -1,
-      isAutoPlaying: false,
-      autoPlayIntervalId: null,
       isAIThinking: false,
       evaluation: 0,
       suggestedMoves: []
