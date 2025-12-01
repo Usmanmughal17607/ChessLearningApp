@@ -2,6 +2,7 @@ import { useChess } from "@/lib/stores/useChess";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { motion } from "framer-motion";
+import { useState } from "react";
 import { 
   Users, 
   BookOpen, 
@@ -10,8 +11,14 @@ import {
   Crown,
   Palette,
   Moon,
-  Sun
+  Sun,
+  Settings as SettingsIcon,
+  HelpCircle,
+  Trophy
 } from "lucide-react";
+import { Settings } from "./Settings";
+import { KeyboardHelp } from "./KeyboardHelp";
+import { Achievements } from "./Achievements";
 
 const THEME_COLORS = {
   classic: "bg-gradient-to-br from-amber-200 to-amber-700",
@@ -34,6 +41,10 @@ export function MainMenu() {
     isDarkMode, 
     toggleDarkMode 
   } = useChess();
+  
+  const [showSettings, setShowSettings] = useState(false);
+  const [showHelp, setShowHelp] = useState(false);
+  const [showAchievements, setShowAchievements] = useState(false);
   
   const themes: ("classic" | "modern" | "wooden" | "midnight" | "emerald" | "sunset" | "ocean" | "neon" | "lavender" | "forest")[] = ["classic", "modern", "wooden", "midnight", "emerald", "sunset", "ocean", "neon", "lavender", "forest"];
   
