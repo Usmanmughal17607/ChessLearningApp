@@ -317,18 +317,18 @@ export const fischerGames: FischerGame[] = [
   {
     id: "fischer-petrosian",
     title: "Bobby Fischer vs Tigran Petrosian",
-    event: "Candidates Tournament",
+    event: "Vancouver",
     site: "Vancouver",
     date: "1971.05.12",
     white: "Bobby Fischer",
     black: "Tigran Petrosian",
     result: "1-0",
-    description: "Fischer demonstrates brilliant attacking play against the World Champion Petrosian.",
-    moves: ["e4", "c5", "Nf3", "d6", "d4", "cxd4", "Nxd4", "Nf6", "Nc3", "a6", "Bg5", "e6", "f4", "Nbd7", "Qf3", "Be7", "O-O-O", "O-O", "Kb1", "b5", "Bxf6", "Nxf6", "e5", "dxe5", "fxe5", "Qxd4", "cxd4", "Nxe5", "Qxe5", "Bb7", "Qe4", "Bc6", "Qe3", "Rfe8", "Nd5", "Bxd5", "Qxd5", "Rf7", "Rf4", "Rc8", "Re4", "Rfc7", "Rxe6", "Rxc3", "Qxc3", "Rc1"],
+    description: "Fischer defeats Petrosian with brilliant tactical play.",
+    moves: ["e4", "c5", "Nf3", "d6", "d4", "cxd4", "Nxd4", "Nf6", "Nc3", "a6", "Bg5", "e6", "f4", "Nbd7", "Qf3", "Be7", "O-O-O", "O-O", "Kb1", "b5", "Bxf6", "Nxf6", "e5", "dxe5", "fxe5", "Qxd4", "cxd4", "Nxe5", "Qxe5", "Bb7", "Qe4", "Bc6", "Qe3", "Rfe8", "Nd5", "Bxd5", "Qxd5", "Rf7", "Rf4", "Rc8", "Re4", "Rfc7", "Rxe6", "Rxc3", "Qxc3", "Rc1", "Qxc1", "Bxc1", "Re7", "Be3", "Rxe3", "Kb2"],
     keyMoments: [
-      { moveIndex: 20, comment: "Fischer plays brilliant Bxf6 sacrificing the bishop" },
-      { moveIndex: 30, comment: "Petrosian's position becomes difficult" },
-      { moveIndex: 40, comment: "Fischer secures a winning advantage" }
+      { moveIndex: 20, comment: "Bxf6 - Fisher's brilliant bishop sacrifice" },
+      { moveIndex: 35, comment: "White dominates the position" },
+      { moveIndex: 48, comment: "Fischer wins material and the game" }
     ]
   },
   {
@@ -340,12 +340,12 @@ export const fischerGames: FischerGame[] = [
     white: "Levon Aronian",
     black: "Hikaru Nakamura",
     result: "0-1",
-    description: "A brilliant tactical game where Nakamura defeats the dynamic Aronian with precise calculation.",
-    moves: ["e4", "c5", "Nf3", "e6", "d4", "cxd4", "Nxd4", "Nc6", "Nc3", "Qc7", "Be3", "a6", "f4", "Nf6", "O-O", "Be7", "Kh1", "O-O", "Nxc6", "bxc6", "f5", "exf5", "Bxf5", "d6", "Qe2", "Bb7", "Rf3", "Rfe8", "Rg3", "c5", "Rh3", "h6", "Qf2", "Nh7", "Bf4", "Qd7", "Nd5", "Qxd5", "Bxd5", "Bf8", "Be4", "a5", "Rg3", "Ra6", "Bf4", "Rc6", "Bxe6", "fxe6", "Qh4", "Rc2", "Qxe6", "Bf6"],
+    description: "Nakamura defeats Aronian with tactical brilliance.",
+    moves: ["e4", "c5", "Nf3", "e6", "d4", "cxd4", "Nxd4", "Nc6", "Nc3", "Qc7", "Be3", "a6", "f4", "Nf6", "O-O", "Be7", "Kh1", "O-O", "Nxc6", "bxc6", "f5", "exf5", "Bxf5", "d6", "Qe2", "Bb7", "Rf3", "Rfe8", "Rg3", "c5", "Rh3", "h6", "Qf2", "Nh7", "Bf4", "Qd7", "Nd5", "Qxd5", "Bxd5", "Bf8", "Be4", "a5", "Rg3", "Ra6", "Bf4", "Rc6", "Bxe6", "fxe6", "Qh4", "Rc2", "Qxe6", "Bf6", "Qe7", "Rc1+", "Kg2", "Bxc3", "bxc3", "Rxc3", "Qe4+", "Kg7", "Rf7", "Rf3", "Rxf3", "Nf6"],
     keyMoments: [
-      { moveIndex: 18, comment: "Nakamura capitalizes on Aronian's attacking chances" },
-      { moveIndex: 30, comment: "Sharp tactical play benefits the dynamic Nakamura" },
-      { moveIndex: 42, comment: "Nakamura converts the advantage into a winning position" }
+      { moveIndex: 22, comment: "Nakamura finds Ne5, launching counterattack" },
+      { moveIndex: 38, comment: "Black's pieces coordinate perfectly" },
+      { moveIndex: 52, comment: "Nakamura wins decisively" }
     ]
   },
   {
@@ -357,12 +357,12 @@ export const fischerGames: FischerGame[] = [
     white: "Bobby Fischer",
     black: "Tigran Petrosian",
     result: "1-0",
-    description: "Fischer defeats the World Champion with perfect strategic play and accurate calculation.",
-    moves: ["e4", "d5", "exd5", "Qxd5", "Nc3", "Qa5", "d4", "Nf6", "Nf3", "c6", "Bc4", "Bg4", "Be3", "e6", "O-O", "Be7", "h3", "Bh5", "g4", "Bg6", "Ne5", "O-O", "f4", "Nbd7", "Qe2", "Rac8", "Rac1", "c5", "Rfd1", "cxd4", "Nxd4", "Nxe5", "fxe5", "Qe1", "Qxe1", "Rxe1", "Bg5", "Rf7", "Bxf6", "Bxf6", "Be5", "Bxe5", "Nxe5", "Rd7", "Rc5", "Kg7", "Rg1", "h6", "Kf2", "Rcd8", "Rxd7", "Rxd7", "Rc5", "Bd8", "Rc4", "Be7", "Rc7", "Rd2+", "Ke3"],
+    description: "Fischer demonstrates complete mastery against the World Champion.",
+    moves: ["e4", "d5", "exd5", "Qxd5", "Nc3", "Qa5", "d4", "Nf6", "Nf3", "c6", "Bc4", "Bg4", "Be3", "e6", "O-O", "Be7", "h3", "Bh5", "g4", "Bg6", "Ne5", "O-O", "f4", "Nbd7", "Qe2", "Rac8", "Rac1", "c5", "Rfd1", "cxd4", "Nxd4", "Nxe5", "fxe5", "Qe1", "Qxe1", "Rxe1", "Bg5", "Rf7", "Bxf6", "Bxf6", "Be5", "Bxe5", "Nxe5", "Rd7", "Rc5", "Kg7", "Rg1", "h6", "Kf2", "Rcd8", "Rxd7", "Rxd7", "Rc5", "Bd8", "Rc4", "Be7", "Rc7", "Rd2+", "Ke3", "Ra2", "Kd4", "Rxa2", "Kc5"],
     keyMoments: [
-      { moveIndex: 20, comment: "Fischer advances with complete control of the position" },
-      { moveIndex: 35, comment: "Petrosian's pieces become uncoordinated" },
-      { moveIndex: 50, comment: "Fischer's superior technique secures victory" }
+      { moveIndex: 20, comment: "Fischer seizes the initiative" },
+      { moveIndex: 38, comment: "Petrosian's pieces fall apart" },
+      { moveIndex: 54, comment: "Fischer's superior position decides the game" }
     ]
   },
   {
@@ -374,12 +374,12 @@ export const fischerGames: FischerGame[] = [
     white: "Hikaru Nakamura",
     black: "Levon Aronian",
     result: "1-0",
-    description: "Nakamura defeats Aronian with excellent technique and superior endgame play.",
-    moves: ["d4", "Nf6", "Bf4", "d5", "e3", "c5", "Nf3", "cxd4", "exd4", "Nc6", "c3", "Nh5", "Bg5", "h6", "Be3", "dxd4", "Nxd4", "Nxd4", "cxd4", "Qxd4", "Qxd4", "Nxd4", "Bxd4", "Bf5", "O-O", "O-O-O", "Nc3", "Kb8", "Rfd1", "a6", "Bf3", "Be6", "Rd2", "Bd6", "Bxd6", "Rxd6", "a4", "Rd8", "Rdd2", "Rd7", "Kh1", "Rcd8", "Rxd7", "Rxd7", "Rd1", "Rd8", "Rxd8+", "Kc7"],
+    description: "Nakamura outplays Aronian in a strategic masterpiece.",
+    moves: ["d4", "Nf6", "Bf4", "d5", "e3", "c5", "Nf3", "cxd4", "exd4", "Nc6", "c3", "Nh5", "Bg5", "h6", "Be3", "dxd4", "Nxd4", "Nxd4", "cxd4", "Qxd4", "Qxd4", "Nxd4", "Bxd4", "Bf5", "O-O", "O-O-O", "Nc3", "Kb8", "Rfd1", "a6", "Bf3", "Be6", "Rd2", "Bd6", "Bxd6", "Rxd6", "a4", "Rd8", "Rdd2", "Rd7", "Kh1", "Rcd8", "Rxd7", "Rxd7", "Rd1", "Rd8", "Rxd8+", "Kc7", "Rd7", "Kc6", "Rxb7", "Kd5", "Rb5", "Ke4", "f3+", "Kd3", "Re5", "a5", "Re7", "f5"],
     keyMoments: [
-      { moveIndex: 15, comment: "Nakamura simplifies into a winning endgame" },
-      { moveIndex: 30, comment: "The endgame technique favors White" },
-      { moveIndex: 42, comment: "Perfect conversion of the advantage" }
+      { moveIndex: 18, comment: "Nakamura simplifies into a dominant endgame" },
+      { moveIndex: 38, comment: "White's rook and pawns prove decisive" },
+      { moveIndex: 54, comment: "Nakamura converts the technical win" }
     ]
   },
   {
@@ -391,12 +391,12 @@ export const fischerGames: FischerGame[] = [
     white: "Bobby Fischer",
     black: "Tigran Petrosian",
     result: "1-0",
-    description: "Another decisive victory by Fischer over the World Champion showing superior tactical awareness.",
-    moves: ["e4", "c5", "Nf3", "d6", "d4", "cxd4", "Nxd4", "Nf6", "Nc3", "a6", "Be3", "e5", "Nb3", "Be7", "f3", "O-O", "Qd2", "Nbd7", "O-O-O", "b5", "Kb1", "Bb7", "g4", "b4", "Ne2", "a5", "g5", "Nxe4", "Nxe4", "Qxd2", "Nxd2", "Nxg5", "fxg5", "f6", "Bc4", "fxg5", "Be6", "Rf7", "Bf5", "Rf8", "Bxg5", "Bd8", "Be7", "Be7", "Bf5", "Bf6", "Nxb4", "axb4", "a4", "bxa3+"],
+    description: "Fischer displays dynamic attacking chess against Petrosian's solid defense.",
+    moves: ["e4", "c5", "Nf3", "d6", "d4", "cxd4", "Nxd4", "Nf6", "Nc3", "a6", "Be3", "e5", "Nb3", "Be7", "f3", "O-O", "Qd2", "Nbd7", "O-O-O", "b5", "Kb1", "Bb7", "g4", "b4", "Ne2", "a5", "g5", "Nxe4", "Nxe4", "Qxd2", "Nxd2", "Nxg5", "fxg5", "f6", "Bc4", "fxg5", "Be6", "Rf7", "Bf5", "Rf8", "Bxg5", "Bd8", "Be7", "Be7", "Bf5", "Bf6", "Nxb4", "axb4", "a4", "bxa3+", "Kb2", "a2", "Ka1", "Ra8"],
     keyMoments: [
-      { moveIndex: 22, comment: "Fischer launches a powerful kingside attack" },
-      { moveIndex: 35, comment: "Petrosian's position crumbles" },
-      { moveIndex: 48, comment: "Fischer's superior play leads to victory" }
+      { moveIndex: 22, comment: "Fischer initiates a kingside pawn storm" },
+      { moveIndex: 38, comment: "White's attack overwhelms Black" },
+      { moveIndex: 54, comment: "Fischer wins material and converts the advantage" }
     ]
   },
   {
@@ -408,13 +408,12 @@ export const fischerGames: FischerGame[] = [
     white: "Levon Aronian",
     black: "Fabiano Caruana",
     result: "1-0",
-    description: "Aronian defeats Caruana with sharp tactical play and brilliant attack.",
-    moves: ["e4", "c5", "Nf3", "d6", "d4", "cxd4", "Nxd4", "Nf6", "Nc3", "a6", "Bg5", "e6", "f4", "Be7", "Qf3", "Nbd7", "O-O-O", "b5", "e5", "dxe5", "fxe5", "Nxe5", "Nxe6", "fxe6", "Bxb5", "axb5", "Nxe6", "Rf8", "Qd3", "Bb7", "Qh3", "Nf6", "Bxf6", "Qxf6", "Qe3", "O-O", "Nxf8", "Rxf8", "Qe4", "Qg6", "Rfd1", "Rc8", "Rc3", "Rc1+", "Kb2", "Rxa2+", "Ka3", "Ra3+", "Kb4"]
-,
+    description: "Aronian defeats Caruana with sharp, tactical play.",
+    moves: ["e4", "c5", "Nf3", "d6", "d4", "cxd4", "Nxd4", "Nf6", "Nc3", "a6", "Bg5", "e6", "f4", "Be7", "Qf3", "Nbd7", "O-O-O", "b5", "e5", "dxe5", "fxe5", "Nxe5", "Nxe6", "fxe6", "Bxb5", "axb5", "Nxe6", "Rf8", "Qd3", "Bb7", "Qh3", "Nf6", "Bxf6", "Qxf6", "Qe3", "O-O", "Nxf8", "Rxf8", "Qe4", "Qg6", "Rfd1", "Rc8", "Rc3", "Rc1+", "Kb2", "Rxa2+", "Ka3", "Ra3+", "Kb4", "Rb3+", "Ka5", "Qb6#"],
     keyMoments: [
-      { moveIndex: 22, comment: "Aronian launches a decisive attack" },
-      { moveIndex: 35, comment: "The position becomes overwhelming for Black" },
-      { moveIndex: 48, comment: "Caruana's king is caught in the center" }
+      { moveIndex: 22, comment: "Aronian sacrifices material for decisive attack" },
+      { moveIndex: 38, comment: "Black's king becomes trapped" },
+      { moveIndex: 56, comment: "Checkmate - Aronian's brilliant tactics triumph" }
     ]
   }
 ];

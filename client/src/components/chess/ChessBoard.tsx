@@ -7,6 +7,21 @@ const PIECE_UNICODE: Record<string, string> = {
   bp: "♟", bn: "♞", bb: "♝", br: "♜", bq: "♛", bk: "♚"
 };
 
+const PIECE_COLORS: Record<string, string> = {
+  wp: "text-white drop-shadow-lg",
+  wn: "text-white drop-shadow-lg",
+  wb: "text-white drop-shadow-lg",
+  wr: "text-white drop-shadow-lg",
+  wq: "text-white drop-shadow-lg",
+  wk: "text-white drop-shadow-lg",
+  bp: "text-gray-900 drop-shadow-md",
+  bn: "text-gray-900 drop-shadow-md",
+  bb: "text-gray-900 drop-shadow-md",
+  br: "text-gray-900 drop-shadow-md",
+  bq: "text-gray-900 drop-shadow-md",
+  bk: "text-gray-900 drop-shadow-md"
+};
+
 const FILES = ["a", "b", "c", "d", "e", "f", "g", "h"];
 const RANKS = ["8", "7", "6", "5", "4", "3", "2", "1"];
 
@@ -203,7 +218,7 @@ export function ChessBoard() {
                     animate={{ scale: 1 }}
                     className={`
                       text-4xl sm:text-5xl md:text-6xl
-                      ${piece?.color === 'w' ? "text-white drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]" : "text-gray-900 drop-shadow-[0_2px_2px_rgba(255,255,255,0.3)]"}
+                      ${piece?.color === 'w' ? "text-white drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]" : "text-black drop-shadow-[0_1px_3px_rgba(255,255,255,0.5)]"}
                       select-none pointer-events-none
                     `}
                   >
