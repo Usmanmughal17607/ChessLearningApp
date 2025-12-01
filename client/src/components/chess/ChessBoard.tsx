@@ -53,6 +53,8 @@ export function ChessBoard() {
     lastMove, 
     theme,
     gameMode,
+    playerColor,
+    isAIThinking,
     selectSquare 
   } = useChess();
   
@@ -61,8 +63,14 @@ export function ChessBoard() {
   const isInCheck = game.isCheck();
   const turn = game.turn();
   
+  const shouldFlipBoard = gameMode === "ai" && playerColor === "b";
+  
+  const displayFiles = shouldFlipBoard ? [...FILES].reverse() : FILES;
+  const displayRanks = shouldFlipBoard ? [...RANKS].reverse() : RANKS;
+  
   const handleSquareClick = (square: Square) => {
     if (gameMode === "review") return;
+    if (gameMode === "ai" && (turn !== playerColor || isAIThinking)) return;
     selectSquare(square);
   };
   
@@ -83,11 +91,13 @@ export function ChessBoard() {
   return (
     <div className="relative select-none">
       <div className="grid grid-cols-8 border-4 border-gray-800 rounded-lg shadow-2xl overflow-hidden">
-        {RANKS.map((rank, rankIndex) => (
-          FILES.map((file, fileIndex) => {
+        {displayRanks.map((rank, displayRankIndex) => (
+          displayFiles.map((file, displayFileIndex) => {
             const square = (file + rank) as Square;
-            const piece = board[rankIndex][fileIndex];
-            const isLight = (rankIndex + fileIndex) % 2 === 0;
+            const boardRankIndex = RANKS.indexOf(rank);
+            const boardFileIndex = FILES.indexOf(file);
+            const piece = board[boardRankIndex][boardFileIndex];
+            const isLight = (boardRankIndex + boardFileIndex) % 2 === 0;
             const isSelected = selectedSquare === square;
             const isLegalMove = legalMoves.includes(square);
             const isLastMove = lastMove && (lastMove.from === square || lastMove.to === square);
@@ -101,25 +111,28 @@ export function ChessBoard() {
             const pieceKey = piece ? `${piece.color}${piece.type}` : null;
             const pieceUnicode = pieceKey ? PIECE_UNICODE[pieceKey] : null;
             
+            const isNotPlayerTurn = gameMode === "ai" && (turn !== playerColor || isAIThinking);
+            
             return (
               <motion.div
                 key={square}
                 className={`
-                  relative aspect-square flex items-center justify-center cursor-pointer
+                  relative aspect-square flex items-center justify-center 
+                  ${isNotPlayerTurn ? "cursor-not-allowed" : "cursor-pointer"}
                   ${bgClass}
                   transition-colors duration-150
-                  hover:brightness-110
+                  ${!isNotPlayerTurn ? "hover:brightness-110" : ""}
                 `}
                 onClick={() => handleSquareClick(square)}
-                whileHover={{ scale: gameMode !== "review" ? 1.02 : 1 }}
-                whileTap={{ scale: gameMode !== "review" ? 0.98 : 1 }}
+                whileHover={{ scale: gameMode !== "review" && !isNotPlayerTurn ? 1.02 : 1 }}
+                whileTap={{ scale: gameMode !== "review" && !isNotPlayerTurn ? 0.98 : 1 }}
               >
-                {fileIndex === 0 && (
+                {displayFileIndex === 0 && (
                   <span className={`absolute top-0.5 left-1 text-xs font-bold ${isLight ? "text-amber-800/70" : "text-amber-100/70"}`}>
                     {rank}
                   </span>
                 )}
-                {rankIndex === 7 && (
+                {displayRankIndex === 7 && (
                   <span className={`absolute bottom-0.5 right-1 text-xs font-bold ${isLight ? "text-amber-800/70" : "text-amber-100/70"}`}>
                     {file}
                   </span>

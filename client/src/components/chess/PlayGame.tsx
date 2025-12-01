@@ -1,6 +1,7 @@
 import { ChessBoard } from "./ChessBoard";
 import { GameInfo } from "./GameInfo";
 import { MoveHistory } from "./MoveHistory";
+import { PGNPanel } from "./PGNPanel";
 import { useChess } from "@/lib/stores/useChess";
 import { motion } from "framer-motion";
 
@@ -32,6 +33,7 @@ export function PlayGame() {
           <div className="space-y-4">
             <GameInfo />
             <MoveHistory />
+            <PGNPanel />
           </div>
         </div>
       </div>

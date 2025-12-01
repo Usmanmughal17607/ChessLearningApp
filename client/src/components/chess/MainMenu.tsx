@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { 
   Users, 
   BookOpen, 
-  Settings, 
+  Bot,
   Crown,
   Palette,
   Moon,
@@ -50,6 +50,16 @@ export function MainMenu() {
         </div>
         
         <Card className="p-6 bg-gray-800/50 backdrop-blur border-gray-700 space-y-4">
+          <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+            <Button
+              className="w-full h-16 text-lg bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800"
+              onClick={() => setGameMode("ai")}
+            >
+              <Bot className="w-6 h-6 mr-3" />
+              Play vs AI
+            </Button>
+          </motion.div>
+          
           <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
             <Button
               className="w-full h-16 text-lg bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800"

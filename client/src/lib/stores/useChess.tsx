@@ -1,8 +1,10 @@
 import { create } from "zustand";
 import { Chess, Move, Square } from "chess.js";
+import { Difficulty, findBestMove, evaluatePosition, getSuggestedMoves } from "@/lib/chessAI";
 
-export type GameMode = "menu" | "play" | "review";
+export type GameMode = "menu" | "play" | "review" | "ai";
 export type Theme = "classic" | "modern" | "wooden" | "midnight";
+export type PlayerColor = "w" | "b";
 
 interface ChessState {
   game: Chess;
@@ -20,6 +22,13 @@ interface ChessState {
   isAutoPlaying: boolean;
   autoPlayIntervalId: NodeJS.Timeout | null;
   
+  aiDifficulty: Difficulty;
+  playerColor: PlayerColor;
+  isAIThinking: boolean;
+  evaluation: number;
+  suggestedMoves: { move: Move; evaluation: number }[];
+  showEvaluation: boolean;
+  
   setGameMode: (mode: GameMode) => void;
   selectSquare: (square: Square | null) => void;
   makeMove: (from: Square, to: Square, promotion?: string) => boolean;
@@ -36,6 +45,14 @@ interface ChessState {
   lastMoveReview: () => void;
   setAutoPlaying: (playing: boolean) => void;
   setAutoPlayIntervalId: (id: NodeJS.Timeout | null) => void;
+  loadFromPGN: (moves: string[]) => void;
+  
+  setAIDifficulty: (difficulty: Difficulty) => void;
+  setPlayerColor: (color: PlayerColor) => void;
+  startAIGame: () => void;
+  makeAIMove: () => void;
+  toggleEvaluation: () => void;
+  updateEvaluation: () => void;
 }
 
 export interface FischerGame {
@@ -109,6 +126,13 @@ export const useChess = create<ChessState>((set, get) => ({
   isAutoPlaying: false,
   autoPlayIntervalId: null,
   
+  aiDifficulty: "medium",
+  playerColor: "w",
+  isAIThinking: false,
+  evaluation: 0,
+  suggestedMoves: [],
+  showEvaluation: true,
+  
   setGameMode: (mode) => {
     const { autoPlayIntervalId } = get();
     if (autoPlayIntervalId) {
@@ -171,13 +195,16 @@ export const useChess = create<ChessState>((set, get) => ({
     const { game } = get();
     
     try {
-      const move = game.move({ from, to, promotion });
+      const gameCopy = new Chess();
+      gameCopy.loadPgn(game.pgn());
+      
+      const move = gameCopy.move({ from, to, promotion });
       if (move) {
-        const capturedPieces = getCapturedPieces(game);
+        const capturedPieces = getCapturedPieces(gameCopy);
         set({ 
-          game: new Chess(game.fen()),
+          game: gameCopy,
           lastMove: { from, to },
-          moveHistory: game.history({ verbose: true }),
+          moveHistory: gameCopy.history({ verbose: true }),
           capturedPieces
         });
         return true;
@@ -328,5 +355,133 @@ export const useChess = create<ChessState>((set, get) => ({
       clearInterval(autoPlayIntervalId);
     }
     set({ autoPlayIntervalId: id });
+  },
+  
+  loadFromPGN: (moves) => {
+    const { autoPlayIntervalId } = get();
+    if (autoPlayIntervalId) {
+      clearInterval(autoPlayIntervalId);
+    }
+    
+    const game = new Chess();
+    let lastFrom: Square | undefined;
+    let lastTo: Square | undefined;
+    
+    for (const move of moves) {
+      try {
+        const sanitizedMove = sanitizeSAN(move);
+        const result = game.move(sanitizedMove);
+        if (result) {
+          lastFrom = result.from as Square;
+          lastTo = result.to as Square;
+        }
+      } catch (e) {
+        console.error("Invalid move in PGN:", move, e);
+        break;
+      }
+    }
+    
+    const capturedPieces = getCapturedPieces(game);
+    
+    set({
+      game: new Chess(game.fen()),
+      gameMode: "play",
+      lastMove: lastFrom && lastTo ? { from: lastFrom, to: lastTo } : null,
+      moveHistory: game.history({ verbose: true }),
+      capturedPieces,
+      selectedSquare: null,
+      legalMoves: [],
+      currentReviewGame: null,
+      reviewMoveIndex: -1,
+      isAutoPlaying: false,
+      autoPlayIntervalId: null
+    });
+  },
+  
+  setAIDifficulty: (difficulty) => {
+    set({ aiDifficulty: difficulty });
+  },
+  
+  setPlayerColor: (color) => {
+    set({ playerColor: color });
+  },
+  
+  startAIGame: () => {
+    const { playerColor } = get();
+    const newGame = new Chess();
+    
+    set({
+      game: newGame,
+      gameMode: "ai",
+      moveHistory: [],
+      lastMove: null,
+      selectedSquare: null,
+      legalMoves: [],
+      capturedPieces: { white: [], black: [] },
+      currentReviewGame: null,
+      reviewMoveIndex: -1,
+      isAutoPlaying: false,
+      autoPlayIntervalId: null,
+      isAIThinking: false,
+      evaluation: 0,
+      suggestedMoves: []
+    });
+    
+    if (playerColor === 'b') {
+      setTimeout(() => get().makeAIMove(), 500);
+    }
+  },
+  
+  makeAIMove: () => {
+    const { game, aiDifficulty } = get();
+    
+    if (game.isGameOver()) return;
+    
+    set({ isAIThinking: true });
+    
+    setTimeout(() => {
+      const { game: currentGame } = get();
+      
+      const gameCopy = new Chess();
+      gameCopy.loadPgn(currentGame.pgn());
+      
+      const bestMove = findBestMove(gameCopy, aiDifficulty);
+      
+      if (bestMove) {
+        gameCopy.move(bestMove);
+        const capturedPieces = getCapturedPieces(gameCopy);
+        const evaluation = evaluatePosition(gameCopy) / 100;
+        const suggestions = getSuggestedMoves(gameCopy, 3).map(s => ({
+          ...s,
+          evaluation: s.evaluation / 100
+        }));
+        
+        set({
+          game: gameCopy,
+          lastMove: { from: bestMove.from as Square, to: bestMove.to as Square },
+          moveHistory: gameCopy.history({ verbose: true }),
+          capturedPieces,
+          isAIThinking: false,
+          evaluation,
+          suggestedMoves: suggestions
+        });
+      } else {
+        set({ isAIThinking: false });
+      }
+    }, 300);
+  },
+  
+  toggleEvaluation: () => {
+    set((state) => ({ showEvaluation: !state.showEvaluation }));
+  },
+  
+  updateEvaluation: () => {
+    const { game } = get();
+    const evaluation = evaluatePosition(game) / 100;
+    const suggestions = getSuggestedMoves(game, 3).map(s => ({
+      ...s,
+      evaluation: s.evaluation / 100
+    }));
+    set({ evaluation, suggestedMoves: suggestions });
   }
 }));
