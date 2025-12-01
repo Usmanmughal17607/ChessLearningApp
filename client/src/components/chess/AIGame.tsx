@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { ChessBoard } from "./ChessBoard";
 import { GameInfo } from "./GameInfo";
 import { MoveHistory } from "./MoveHistory";
@@ -8,7 +8,11 @@ import { useChess } from "@/lib/stores/useChess";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { motion } from "framer-motion";
-import { Bot, ArrowLeft, RotateCcw, Loader2 } from "lucide-react";
+import { Bot, ArrowLeft, RotateCcw, Loader2, HelpCircle } from "lucide-react";
+import { Settings } from "./Settings";
+import { KeyboardHelp } from "./KeyboardHelp";
+import { HintSystem } from "./HintSystem";
+import { SoundManager } from "@/lib/soundManager";
 
 const DIFFICULTY_LABELS = {
   beginner: "Beginner",
@@ -28,8 +32,15 @@ export function AIGame() {
     makeAIMove,
     setGameMode,
     resetGame,
-    updateEvaluation
+    updateEvaluation,
+    isDarkMode,
+    toggleDarkMode,
+    suggestedMoves
   } = useChess();
+  
+  const [showSettings, setShowSettings] = useState(false);
+  const [showHelp, setShowHelp] = useState(false);
+  const [showHint, setShowHint] = useState(false);
   
   const turn = game.turn();
   const isPlayerTurn = turn === playerColor;
@@ -57,7 +68,11 @@ export function AIGame() {
   const getStatusMessage = () => {
     if (game.isCheckmate()) {
       const winner = turn === 'w' ? 'Black' : 'White';
-      return winner === (playerColor === 'w' ? 'White' : 'Black') ? "You win!" : "AI wins!";
+      const playerWins = winner === (playerColor === 'w' ? 'White' : 'Black');
+      if (playerWins) {
+        SoundManager.playGameOverSound();
+      }
+      return playerWins ? "You win!" : "AI wins!";
     }
     if (game.isStalemate()) return "Stalemate - Draw!";
     if (game.isDraw()) return "Draw!";
@@ -100,6 +115,11 @@ export function AIGame() {
           </p>
         </motion.div>
         
+        <div className="flex gap-2 justify-end mb-4">
+          <Button onClick={() => setShowSettings(true)} size="sm" className="bg-blue-600 hover:bg-blue-700">⚙️ Settings</Button>
+          <Button onClick={() => setShowHelp(true)} size="sm" className="bg-green-600 hover:bg-green-700"><HelpCircle className="w-4 h-4" /></Button>
+        </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
           <div className="lg:col-span-2 flex justify-center">
             <div className="w-full max-w-[min(80vw,500px)]">

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Volume2, Volume2Off, Zap, Moon } from "lucide-react";
+import { Volume2, VolumeOff, Zap, Moon } from "lucide-react";
 import { SoundManager } from "@/lib/soundManager";
 
 interface SettingsProps {
@@ -34,7 +34,7 @@ export function Settings({ isDarkMode, onDarkModeToggle, onClose }: SettingsProp
         <div className="space-y-3">
           <div className="flex items-center justify-between p-3 bg-gray-700/50 rounded">
             <div className="flex items-center gap-2">
-              {soundEnabled ? <Volume2 className="w-5 h-5 text-blue-400" /> : <Volume2Off className="w-5 h-5 text-gray-500" />}
+              {soundEnabled ? <Volume2 className="w-5 h-5 text-blue-400" /> : <VolumeOff className="w-5 h-5 text-gray-500" />}
               <span className="text-white">Sound Effects</span>
             </div>
             <button

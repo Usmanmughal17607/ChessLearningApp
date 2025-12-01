@@ -150,6 +150,36 @@ export function MainMenu() {
             </div>
           </div>
         </Card>
+
+        <div className="flex gap-3 justify-center flex-wrap">
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => setShowSettings(true)}
+            className="p-3 bg-gray-800 hover:bg-gray-700 rounded-lg transition"
+            title="Settings"
+          >
+            <SettingsIcon className="w-6 h-6 text-blue-400" />
+          </motion.button>
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => setShowHelp(true)}
+            className="p-3 bg-gray-800 hover:bg-gray-700 rounded-lg transition"
+            title="Keyboard Help"
+          >
+            <HelpCircle className="w-6 h-6 text-green-400" />
+          </motion.button>
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => setShowAchievements(true)}
+            className="p-3 bg-gray-800 hover:bg-gray-700 rounded-lg transition"
+            title="Achievements"
+          >
+            <Trophy className="w-6 h-6 text-yellow-400" />
+          </motion.button>
+        </div>
         
         <motion.p 
           className="text-center text-xs text-gray-600"
@@ -157,9 +187,26 @@ export function MainMenu() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
         >
-          Featuring 10 legendary Bobby Fischer games
+          Featuring 15 legendary games from the world's greatest GMs
         </motion.p>
       </motion.div>
+
+      {showSettings && <Settings isDarkMode={isDarkMode} onDarkModeToggle={toggleDarkMode} onClose={() => setShowSettings(false)} />}
+      {showHelp && <KeyboardHelp onClose={() => setShowHelp(false)} />}
+      {showAchievements && (
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.9 }}
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50"
+          onClick={() => setShowAchievements(false)}
+        >
+          <Card className="bg-gray-800 border-gray-700 p-6 max-w-md w-full">
+            <h2 className="text-2xl font-bold text-white mb-6">Achievements</h2>
+            <Achievements stats={{ gamesPlayed: 0, gamesWon: 0, gamesLost: 0, legendaryGamesViewed: 15 }} />
+          </Card>
+        </motion.div>
+      )}
     </div>
   );
 }
