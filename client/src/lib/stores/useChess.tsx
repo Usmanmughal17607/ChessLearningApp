@@ -306,7 +306,7 @@ export const useChess = create<ChessState>((set, get) => ({
           actualIndex = i;
         }
       } catch (e) {
-        console.error("Invalid move:", currentReviewGame.moves[i], e);
+        // Silently skip invalid moves instead of logging error
         break;
       }
     }
