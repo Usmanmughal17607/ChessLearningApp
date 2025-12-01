@@ -177,11 +177,11 @@ function minimax(
 }
 
 const DIFFICULTY_SETTINGS: Record<Difficulty, { depth: number; randomness: number }> = {
-  beginner: { depth: 1, randomness: 0.4 },
-  easy: { depth: 2, randomness: 0.25 },
-  medium: { depth: 3, randomness: 0.1 },
-  hard: { depth: 4, randomness: 0.05 },
-  master: { depth: 5, randomness: 0 }
+  beginner: { depth: 1, randomness: 0.5 },
+  easy: { depth: 2, randomness: 0.3 },
+  medium: { depth: 2, randomness: 0.1 },
+  hard: { depth: 3, randomness: 0.05 },
+  master: { depth: 4, randomness: 0 }
 };
 
 export function findBestMove(game: Chess, difficulty: Difficulty = "medium"): Move | null {

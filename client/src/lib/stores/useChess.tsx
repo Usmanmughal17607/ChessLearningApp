@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { Chess, Move, Square } from "chess.js";
 import { Difficulty, findBestMove, evaluatePosition, getSuggestedMoves } from "@/lib/chessAI";
 
-export type GameMode = "menu" | "play" | "review" | "ai";
+export type GameMode = "menu" | "play" | "review" | "ai" | "online";
 export type Theme = "classic" | "modern" | "wooden" | "midnight" | "emerald" | "sunset" | "ocean" | "neon" | "lavender" | "forest";
 export type PlayerColor = "w" | "b";
 
@@ -29,6 +29,10 @@ interface ChessState {
   suggestedMoves: { move: Move; evaluation: number }[];
   showEvaluation: boolean;
   
+  gameCode: string | null;
+  isOnline: boolean;
+  opponentName: string;
+  
   setGameMode: (mode: GameMode) => void;
   selectSquare: (square: Square | null) => void;
   makeMove: (from: Square, to: Square, promotion?: string) => boolean;
@@ -53,6 +57,14 @@ interface ChessState {
   makeAIMove: () => void;
   toggleEvaluation: () => void;
   updateEvaluation: () => void;
+  
+  gameCode: string | null;
+  isOnline: boolean;
+  opponentName: string;
+  startOnlineGame: (code?: string) => void;
+  syncMove: (move: { from: string; to: string; san: string }) => void;
+  setGameCode: (code: string | null) => void;
+  setOpponentName: (name: string) => void;
 }
 
 export interface FischerGame {
@@ -132,6 +144,10 @@ export const useChess = create<ChessState>((set, get) => ({
   evaluation: 0,
   suggestedMoves: [],
   showEvaluation: true,
+  
+  gameCode: null,
+  isOnline: false,
+  opponentName: "Opponent",
   
   setGameMode: (mode) => {
     const { autoPlayIntervalId } = get();
@@ -483,5 +499,40 @@ export const useChess = create<ChessState>((set, get) => ({
       evaluation: s.evaluation / 100
     }));
     set({ evaluation, suggestedMoves: suggestions });
-  }
+  },
+  
+  startOnlineGame: (code?: string) => {
+    const newCode = code || Math.random().toString(36).substring(2, 8).toUpperCase();
+    set({
+      game: new Chess(),
+      gameMode: "online",
+      isOnline: true,
+      gameCode: newCode,
+      playerColor: code ? "b" : "w",
+      moveHistory: [],
+      lastMove: null,
+      selectedSquare: null,
+      legalMoves: [],
+      capturedPieces: { white: [], black: [] }
+    });
+  },
+  
+  syncMove: (move: { from: string; to: string; san: string }) => {
+    const { game } = get();
+    const gameCopy = new Chess(game.fen());
+    const moveResult = gameCopy.move({ from: move.from as Square, to: move.to as Square });
+    
+    if (moveResult) {
+      const capturedPieces = getCapturedPieces(gameCopy);
+      set({
+        game: gameCopy,
+        lastMove: { from: move.from as Square, to: move.to as Square },
+        moveHistory: gameCopy.history({ verbose: true }),
+        capturedPieces
+      });
+    }
+  },
+  
+  setGameCode: (code: string | null) => set({ gameCode: code }),
+  setOpponentName: (name: string) => set({ opponentName: name })
 }));
