@@ -2,13 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { openingsLibrary, OpeningInfo } from '@/data/openingsLibrary';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { ChevronLeft, Zap, RotateCcw, Crown, Flame } from 'lucide-react';
+import { ChevronLeft, Zap, RotateCcw, Crown, Flame, Play, Pause, SkipForward, BarChart3, Brain, Trophy, Clock } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Chess, Move, Square } from 'chess.js';
+import { useOpeningStats } from '@/lib/stores/openingStats';
 
 interface OpeningCoachProps {
   onBack: () => void;
 }
+
+type GameMode = 'select' | 'play' | 'autoplay' | 'blitz' | 'quiz' | 'stats' | 'achievements';
+type DifficultyFilter = 'All' | 'Beginner' | 'Intermediate' | 'Advanced';
 
 export function OpeningCoach({ onBack }: OpeningCoachProps) {
   const [selectedOpeningId, setSelectedOpeningId] = useState<string | null>(null);
@@ -18,6 +22,17 @@ export function OpeningCoach({ onBack }: OpeningCoachProps) {
   const [feedback, setFeedback] = useState<string>('');
   const [selectedSquare, setSelectedSquare] = useState<Square | null>(null);
   const [legalMoves, setLegalMoves] = useState<Square[]>([]);
+  const [gameMode, setGameMode] = useState<GameMode>('select');
+  const [difficultyFilter, setDifficultyFilter] = useState<DifficultyFilter>('All');
+  const [autoPlaySpeed, setAutoPlaySpeed] = useState(1);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(false);
+  const [blitzTime, setBlitzTime] = useState(30);
+  const [blitzTimeLeft, setBlitzTimeLeft] = useState(30);
+  const [quizMode, setQuizMode] = useState(false);
+  const [quizMoveOptions, setQuizMoveOptions] = useState<string[]>([]);
+  const [selectedVariation, setSelectedVariation] = useState(0);
+  const [mistakesCount, setMistakesCount] = useState(0);
+  const { updateStats, getStats, unlockAchievement, getAchievements } = useOpeningStats();
 
   const currentOpening = selectedOpeningId
     ? openingsLibrary.find(o => o.id === selectedOpeningId)
@@ -139,8 +154,202 @@ export function OpeningCoach({ onBack }: OpeningCoachProps) {
     }
   };
 
+  const handleGameComplete = () => {
+    if (currentOpening) {
+      updateStats(currentOpening.id, true, mistakesCount);
+      if (mistakesCount === 0) {
+        unlockAchievement('perfect-game');
+      }
+      const stats = getStats(currentOpening.id);
+      if (stats && stats.timesCompleted === 1) {
+        unlockAchievement('first-opening');
+      }
+    }
+  };
+
+  const generateQuizOptions = () => {
+    if (!currentOpening || game?.turn() !== 'w') return;
+    const moves = game.moves({ verbose: true });
+    const correctMove = currentOpening.sampleMoves[moveCount];
+    const options = [correctMove];
+    while (options.length < 4 && moves.length > 0) {
+      const random = moves[Math.floor(Math.random() * moves.length)];
+      if (!options.includes(random.san)) {
+        options.push(random.san);
+      }
+    }
+    setQuizMoveOptions(options.sort(() => Math.random() - 0.5));
+  };
+
+  const handleQuizAnswer = (move: string) => {
+    if (!game || !currentOpening) return;
+    const expectedMove = currentOpening.sampleMoves[moveCount];
+    if (move === expectedMove) {
+      setFeedback('✨ Correct!');
+      try {
+        game.move(move);
+        setGame(new Chess(game.fen()));
+        setMoveCount(moveCount + 1);
+        generateQuizOptions();
+      } catch (e) {
+        console.error('Quiz move error:', e);
+      }
+    } else {
+      setMistakesCount(mistakesCount + 1);
+      setFeedback('❌ Wrong! Try: ' + expectedMove);
+    }
+  };
+
+  useEffect(() => {
+    if (quizMode && gameMode === 'quiz') {
+      generateQuizOptions();
+    }
+  }, [quizMode, gameMode, moveCount]);
+
+  useEffect(() => {
+    if (gameMode !== 'blitz') return;
+    if (!isAutoPlaying && blitzTimeLeft <= 0) return;
+    
+    const timer = setInterval(() => {
+      setBlitzTimeLeft(prev => {
+        if (prev <= 1) {
+          setIsAutoPlaying(false);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+    
+    return () => clearInterval(timer);
+  }, [gameMode, isAutoPlaying, blitzTimeLeft]);
+
+  useEffect(() => {
+    if (!isAutoPlaying || !currentOpening || gameMode !== 'autoplay') return;
+    
+    const timer = setTimeout(() => {
+      if (moveCount < currentOpening.sampleMoves.length) {
+        const nextMove = currentOpening.sampleMoves[moveCount];
+        try {
+          game?.move(nextMove);
+          setGame(new Chess(game!.fen()));
+          setMoveCount(moveCount + 1);
+        } catch (e) {
+          console.error('Auto play error:', e);
+        }
+      } else {
+        setIsAutoPlaying(false);
+        handleGameComplete();
+      }
+    }, 3000 / autoPlaySpeed);
+    
+    return () => clearTimeout(timer);
+  }, [isAutoPlaying, moveCount, game, currentOpening, gameMode, autoPlaySpeed]);
+
+  const filteredOpenings = openingsLibrary.filter(o => 
+    difficultyFilter === 'All' || o.difficulty === difficultyFilter
+  );
+
+  const getOpeningFamily = (opening: OpeningInfo) => {
+    const familyMap: Record<string, string> = {
+      'italian-game': 'Open Games',
+      'ruy-lopez': 'Open Games',
+      'sicilian-defense': 'Semi-Open Games',
+      'french-defense': 'Semi-Open Games',
+      'caro-kann': 'Semi-Open Games',
+    };
+    return familyMap[opening.id] || 'Other';
+  };
+
+  // Achievements Screen
+  if (gameMode === 'achievements') {
+    const achievements = getAchievements();
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-purple-950 to-slate-950 text-white p-4 sm:p-6">
+        <div className="w-full max-w-4xl mx-auto">
+          <button
+            onClick={() => setGameMode('select')}
+            className="flex items-center gap-2 mb-6 px-4 py-2 rounded-lg hover:bg-white/10 transition-colors text-slate-300"
+          >
+            <ChevronLeft className="w-5 h-5" />
+            Back
+          </button>
+          <div className="text-center mb-8">
+            <h1 className="text-4xl font-bold text-amber-400 mb-2 flex items-center justify-center gap-2">
+              <Trophy className="w-10 h-10" />
+              Achievements
+            </h1>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {achievements.map((ach) => (
+              <motion.div
+                key={ach.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className={`p-4 rounded-lg border ${ach.unlockedAt ? 'bg-amber-600/20 border-amber-500' : 'bg-slate-800 border-slate-700'}`}
+              >
+                <div className="flex items-start gap-3">
+                  <Trophy className={`w-6 h-6 ${ach.unlockedAt ? 'text-amber-400' : 'text-slate-500'}`} />
+                  <div className="flex-1">
+                    <h3 className={`font-bold ${ach.unlockedAt ? 'text-amber-400' : 'text-slate-400'}`}>{ach.name}</h3>
+                    <p className="text-xs text-slate-400">{ach.description}</p>
+                    {ach.unlockedAt && <p className="text-xs text-amber-300 mt-1">✓ Unlocked {new Date(ach.unlockedAt).toLocaleDateString()}</p>}
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Statistics Screen
+  if (gameMode === 'stats') {
+    const topStats = filteredOpenings.map(o => ({ opening: o, stats: getStats(o.id) })).sort((a, b) => b.stats.timesCompleted - a.stats.timesCompleted);
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-purple-950 to-slate-950 text-white p-4 sm:p-6">
+        <div className="w-full max-w-4xl mx-auto">
+          <button
+            onClick={() => setGameMode('select')}
+            className="flex items-center gap-2 mb-6 px-4 py-2 rounded-lg hover:bg-white/10 transition-colors text-slate-300"
+          >
+            <ChevronLeft className="w-5 h-5" />
+            Back
+          </button>
+          <div className="text-center mb-8">
+            <h1 className="text-4xl font-bold text-amber-400 mb-2 flex items-center justify-center gap-2">
+              <BarChart3 className="w-10 h-10" />
+              Your Statistics
+            </h1>
+          </div>
+          <div className="space-y-3">
+            {topStats.map(({ opening, stats }) => (
+              <motion.div
+                key={opening.id}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                className="bg-slate-800 border border-slate-700 p-4 rounded-lg"
+              >
+                <div className="flex justify-between items-center">
+                  <div>
+                    <h3 className="font-bold text-amber-400">{opening.name}</h3>
+                    <p className="text-xs text-slate-400">Completed: {stats.timesCompleted} • Played: {stats.timesPlayed} • Perfect: {stats.perfectMoves}</p>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-2xl font-bold text-green-400">{stats.timesCompleted > 0 ? Math.round((stats.timesCompleted / stats.timesPlayed) * 100) : 0}%</div>
+                    <p className="text-xs text-slate-400">Success Rate</p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   // Selection Screen
-  if (!currentOpening) {
+  if (gameMode === 'select' && !selectedOpeningId) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-950 via-purple-950 to-slate-950 text-white">
         <div className="fixed inset-0 opacity-20 pointer-events-none">
@@ -172,20 +381,40 @@ export function OpeningCoach({ onBack }: OpeningCoachProps) {
                 Opening Coach
               </h1>
             </motion.div>
-            <p className="text-sm sm:text-base text-slate-400 max-w-2xl mx-auto">
+            <p className="text-sm sm:text-base text-slate-400 max-w-2xl mx-auto mb-6">
               Master chess openings by playing against AI
             </p>
+            <div className="flex gap-2 justify-center flex-wrap">
+              <Button onClick={() => setGameMode('stats')} className="bg-gradient-to-r from-blue-600 to-blue-700 text-sm h-9">
+                <BarChart3 className="w-4 h-4 mr-1" /> Stats
+              </Button>
+              <Button onClick={() => setGameMode('achievements')} className="bg-gradient-to-r from-purple-600 to-purple-700 text-sm h-9">
+                <Trophy className="w-4 h-4 mr-1" /> Achievements
+              </Button>
+            </div>
+            <div className="flex gap-2 justify-center flex-wrap mt-4">
+              {['All', 'Beginner', 'Intermediate', 'Advanced'].map((diff) => (
+                <Button
+                  key={diff}
+                  onClick={() => setDifficultyFilter(diff as DifficultyFilter)}
+                  variant={difficultyFilter === diff ? 'default' : 'outline'}
+                  className="text-xs h-8"
+                >
+                  {diff}
+                </Button>
+              ))}
+            </div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-            {openingsLibrary.map((opening, idx) => (
+            {filteredOpenings.map((opening, idx) => (
               <motion.button
                 key={opening.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: idx * 0.05 }}
                 whileHover={{ scale: 1.05 }}
-                onClick={() => setSelectedOpeningId(opening.id)}
+                onClick={() => { setSelectedOpeningId(opening.id); setGameMode('play'); setMistakesCount(0); }}
                 className="group relative"
               >
                 <div className="absolute -inset-0.5 bg-gradient-to-r from-amber-600 to-orange-600 rounded-xl blur opacity-0 group-hover:opacity-100 transition duration-300" />

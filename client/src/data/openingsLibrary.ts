@@ -14,6 +14,13 @@ export interface OpeningInfo {
   keyIdeas: string[];
   history: string;
   sampleMoves: string[];
+  moveExplanations?: Record<number, string>;
+  variations?: {
+    name: string;
+    moves: string[];
+    description: string;
+  }[];
+  family?: string;
   keyMoments?: { moveIndex: number; comment: string }[];
 }
 
