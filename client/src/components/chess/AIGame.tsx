@@ -154,10 +154,14 @@ export function AIGame() {
             <EvaluationBar />
             <GameInfo />
             <MoveHistory />
+            {isPlayerTurn && <HintSystem suggestedMoves={suggestedMoves} showHint={showHint} onShowHint={() => setShowHint(!showHint)} />}
             <PGNPanel />
           </div>
         </div>
       </div>
+
+      {showSettings && <Settings isDarkMode={isDarkMode} onDarkModeToggle={toggleDarkMode} onClose={() => setShowSettings(false)} />}
+      {showHelp && <KeyboardHelp onClose={() => setShowHelp(false)} />}
     </div>
   );
 }

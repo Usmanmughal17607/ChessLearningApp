@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { ChessBoard } from "./ChessBoard";
 import { GameInfo } from "./GameInfo";
 import { MoveHistory } from "./MoveHistory";
@@ -5,9 +6,15 @@ import { GameControls } from "./GameControls";
 import { FischerGamesLibrary } from "./FischerGamesLibrary";
 import { useChess } from "@/lib/stores/useChess";
 import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { HelpCircle } from "lucide-react";
+import { Settings } from "./Settings";
+import { KeyboardHelp } from "./KeyboardHelp";
 
 export function ReviewGame() {
-  const { currentReviewGame } = useChess();
+  const { currentReviewGame, isDarkMode, toggleDarkMode } = useChess();
+  const [showSettings, setShowSettings] = useState(false);
+  const [showHelp, setShowHelp] = useState(false);
   
   if (!currentReviewGame) {
     return (
@@ -22,6 +29,10 @@ export function ReviewGame() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 p-4">
       <div className="max-w-6xl mx-auto">
+        <div className="flex gap-2 justify-end mb-4">
+          <Button onClick={() => setShowSettings(true)} size="sm" className="bg-blue-600 hover:bg-blue-700">⚙️ Settings</Button>
+          <Button onClick={() => setShowHelp(true)} size="sm" className="bg-green-600 hover:bg-green-700"><HelpCircle className="w-4 h-4" /></Button>
+        </div>
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -47,6 +58,9 @@ export function ReviewGame() {
           </div>
         </div>
       </div>
+
+      {showSettings && <Settings isDarkMode={isDarkMode} onDarkModeToggle={toggleDarkMode} onClose={() => setShowSettings(false)} />}
+      {showHelp && <KeyboardHelp onClose={() => setShowHelp(false)} />}
     </div>
   );
 }
