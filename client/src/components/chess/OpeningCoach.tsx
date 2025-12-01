@@ -208,63 +208,8 @@ export function OpeningCoach({ onBack }: OpeningCoachProps) {
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
+            className="bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700 rounded-xl p-4 sm:p-6 flex justify-center"
           >
-            {/* Title Card */}
-            <div className="bg-gradient-to-br from-amber-600/20 to-orange-600/20 border border-amber-500/30 rounded-xl p-4">
-              <h2 className="text-2xl font-bold text-amber-400 mb-2">{currentOpening.name}</h2>
-              <p className="text-xs text-slate-300">{currentOpening.description}</p>
-            </div>
-
-            {/* Progress */}
-            <div className="bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700 rounded-xl p-4">
-              <div className="text-xs text-slate-300 font-semibold mb-2">Progress</div>
-              <div className="text-2xl font-bold text-amber-400 mb-2">
-                {moveCount}/{currentOpening.sampleMoves.length}
-              </div>
-              <div className="w-full bg-slate-700 rounded-full h-2 overflow-hidden">
-                <motion.div
-                  className="bg-gradient-to-r from-amber-500 to-orange-500 h-full"
-                  initial={{ width: 0 }}
-                  animate={{ width: `${(moveCount / currentOpening.sampleMoves.length) * 100}%` }}
-                  transition={{ duration: 0.5 }}
-                />
-              </div>
-            </div>
-
-            {/* Key Ideas */}
-            <div className="bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700 rounded-xl p-4">
-              <h3 className="font-bold text-amber-400 mb-3 flex items-center gap-2 text-sm">
-                <Flame className="w-4 h-4" />
-                Key Ideas
-              </h3>
-              <ul className="space-y-2">
-                {currentOpening.keyIdeas.slice(0, 2).map((idea, i) => (
-                  <li key={i} className="flex gap-2 text-xs text-slate-300">
-                    <span className="text-amber-500">•</span>
-                    <span>{idea}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Masters */}
-            <div className="bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700 rounded-xl p-4">
-              <h3 className="font-bold text-amber-400 mb-3 flex items-center gap-2 text-sm">
-                <Crown className="w-4 h-4" />
-                Masters
-              </h3>
-              <div className="space-y-2">
-                {currentOpening.famousGMs.slice(0, 2).map((gm, i) => (
-                  <div key={i} className="text-xs">
-                    <div className="text-amber-300 font-semibold">{gm.name}</div>
-                    <div className="text-slate-400">{gm.century}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </motion.div>
-
-            <div className="bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700 rounded-xl p-4 sm:p-6 flex justify-center">
               {/* Board */}
               <div className="bg-gradient-to-br from-slate-900 to-black p-2 sm:p-3 rounded-lg mb-6 shadow-2xl overflow-hidden">
                 <div className="grid gap-0 bg-slate-950 rounded-md overflow-hidden" style={{ gridTemplateColumns: 'repeat(8, 1fr)', maxWidth: 'fit-content' }}>
@@ -365,7 +310,6 @@ export function OpeningCoach({ onBack }: OpeningCoachProps) {
                   <span className="hidden sm:inline">Reset</span>
                 </Button>
               </div>
-            </div>
           </motion.div>
 
           {/* Info Panels Below Board */}
@@ -460,7 +404,7 @@ export function OpeningCoach({ onBack }: OpeningCoachProps) {
                 ))}
               </div>
             </div>
-          </motion.div>
+          </div>
         </motion.div>
       </div>
     </div>
