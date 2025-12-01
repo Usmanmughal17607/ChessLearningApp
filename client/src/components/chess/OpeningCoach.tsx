@@ -119,6 +119,26 @@ export function OpeningCoach({ onBack }: OpeningCoachProps) {
     }
   };
 
+  const playMoveForUser = () => {
+    if (!game || !currentOpening) return;
+    if (game.turn() !== 'w' || moveCount >= currentOpening.sampleMoves.length) return;
+    
+    const nextMove = currentOpening.sampleMoves[moveCount];
+    try {
+      const move = game.move(nextMove);
+      if (move) {
+        setFeedback('🤖 Playing: ' + nextMove);
+        setGame(new Chess(game.fen()));
+        setMoveCount(moveCount + 1);
+        setShowHint(false);
+        setSelectedSquare(null);
+        setLegalMoves([]);
+      }
+    } catch (e) {
+      console.error('Play move error:', e);
+    }
+  };
+
   // Selection Screen
   if (!currentOpening) {
     return (
@@ -300,6 +320,15 @@ export function OpeningCoach({ onBack }: OpeningCoachProps) {
                   <Zap className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
                   <span className="hidden sm:inline">Hint</span>
                   <span className="sm:hidden">Hint</span>
+                </Button>
+                <Button 
+                  onClick={playMoveForUser}
+                  disabled={moveCount >= currentOpening.sampleMoves.length || game?.turn() !== 'w'}
+                  className="flex-1 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 disabled:opacity-50 text-sm h-9"
+                >
+                  <Zap className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
+                  <span className="hidden sm:inline">Play Move</span>
+                  <span className="sm:hidden">Play</span>
                 </Button>
                 <Button 
                   onClick={resetGame}
