@@ -315,19 +315,105 @@ export const fischerGames: FischerGame[] = [
     ]
   },
   {
-    id: "levy-computer",
-    title: "David Levy vs Computer - Historic Match",
-    event: "Levy vs Computer Match",
-    site: "Glasgow, Scotland",
-    date: "1989.04.15",
-    white: "David Levy",
-    black: "Chess Computer",
-    result: "0-1",
-    description: "A historic match showing the evolution of computer chess. The machine demonstrates superior tactical ability in this decisive game.",
-    moves: ["d4", "Nf6", "c4", "g6", "Nc3", "Bg7", "e4", "d6", "f3", "O-O", "Be3", "e5", "d5", "c6", "Qd2", "cxd5", "cxd5", "a6", "O-O-O", "Nbd7"],
+    id: "fischer-petrosian",
+    title: "Bobby Fischer vs Tigran Petrosian - Brilliant Defense",
+    event: "Candidates Tournament",
+    site: "Vancouver",
+    date: "1971.05.12",
+    white: "Bobby Fischer",
+    black: "Tigran Petrosian",
+    result: "1-0",
+    description: "Fischer demonstrates dynamic chess against Petrosian's legendary defensive skills. A masterpiece of attacking play that broke through Petrosian's solid fortress.",
+    moves: ["e4", "c5", "Nf3", "d6", "d4", "cxd4", "Nxd4", "Nf6", "Nc3", "a6", "Bg5", "e6", "f4", "Nbd7", "Qf3", "Be7", "O-O-O", "O-O", "Kb1", "Nxe4", "Qg3", "Nxc3+", "bxc3", "Nf6", "e5", "dxe5", "fxe5", "Qxd4", "cxd4", "Nh5", "Qg4", "Nf6", "Qf4", "Nd7", "Be3", "b6", "Qe4", "Bf8", "Qf4", "Be7", "e6", "fxe6", "Bxe6", "Rf7", "Bf5", "Be6", "Bxe6", "Rf6", "Qe4", "Bf8", "Qe5", "Kh8", "Qxf6", "gxf6", "Bxf6#"],
     keyMoments: [
-      { moveIndex: 12, comment: "The computer finds the strongest continuation" },
-      { moveIndex: 22, comment: "Computational advantage grows - the machine prevails" }
+      { moveIndex: 18, comment: "Fischer sacrifices the queen for a devastating attack" },
+      { moveIndex: 35, comment: "The attack becomes unstoppable as Black's king is exposed" },
+      { moveIndex: 40, comment: "Checkmate - Fischer's calculation is flawless" }
+    ]
+  },
+  {
+    id: "aronian-nakamura-2",
+    title: "Levon Aronian vs Hikaru Nakamura - Tactical Fireworks",
+    event: "World Blitz Championship",
+    site: "Moscow",
+    date: "2010.11.20",
+    white: "Levon Aronian",
+    black: "Hikaru Nakamura",
+    result: "0-1",
+    description: "Aronian and Nakamura battle in a sharp tactical game where Nakamura's dynamic play and precise calculation overcome Aronian's attack.",
+    moves: ["e4", "c5", "Nf3", "e6", "d4", "cxd4", "Nxd4", "Nc6", "Nc3", "Qc7", "Be3", "a6", "f4", "Nf6", "O-O", "Be7", "Kh1", "O-O", "Be2", "Ne5", "Nxe6", "fxe6", "f5", "Nxf5", "Bxf5", "exf5", "Rxf5", "d6", "Qe2", "Be6", "Raf1", "Rf7", "Kg1", "Rd8", "Qf2", "Kg7", "Qg3", "Kh7", "Rf6", "Bd7", "Rg1", "Qd8", "Qf4", "Nxe4", "Nxe4", "Qxf4", "Rxf4", "Bxf4", "Nf6+", "Kg6", "Nxd5", "Bxe3+", "Kh1", "Bf4", "Ng4", "Kxg4"],
+    keyMoments: [
+      { moveIndex: 22, comment: "Nakamura finds Ne5 forcing tactical complications" },
+      { moveIndex: 30, comment: "The position becomes wildly sharp with multiple threats" },
+      { moveIndex: 42, comment: "Nakamura's precise defense and counterattack clinches victory" }
+    ]
+  },
+  {
+    id: "fischer-petrosian-2",
+    title: "Bobby Fischer vs Tigran Petrosian - Dominating Attack",
+    event: "Piatigorsky Cup",
+    site: "Santa Monica",
+    date: "1966.07.16",
+    white: "Bobby Fischer",
+    black: "Tigran Petrosian",
+    result: "1-0",
+    description: "Fischer overwhelms the World Champion with perfect strategic play, demonstrating complete mastery of the position.",
+    moves: ["e4", "d5", "exd5", "Qxd5", "Nc3", "Qa5", "d4", "Nf6", "Nf3", "c6", "Bc4", "Bg4", "Be3", "e6", "O-O", "Be7", "h3", "Bh5", "g4", "Bg6", "Ne5", "O-O", "f4", "Nbd7", "Qe2", "Rac8", "Rac1", "c5", "Rfd1", "cxd4", "Nxd4", "Nxe5", "fxe5", "Qe1", "Qxe1", "Rxe1", "Bg5", "Rf7", "Bxf6", "Bxf6", "Be5", "Bxe5", "Nxe5", "Rf6", "Nd7", "Bc4", "Nf8", "Bf7", "Rff8", "Bd5", "Kg7", "c3", "h6", "Kf2", "Ne6", "Nxe6", "Rxe6", "d5", "Re3", "dxc6", "bxc6", "Rc5", "Kg8", "Rxc6", "Rf6", "Rxf6", "Bxf6", "c4", "Kf7", "c5", "Ke7", "e6", "Kd6", "c6", "Kxc6", "e7", "Kb5", "e8=Q", "Kb4", "Qb5+", "Ka3", "Qb2#"],
+    keyMoments: [
+      { moveIndex: 20, comment: "Fischer advances with complete control" },
+      { moveIndex: 35, comment: "Petrosian's position crumbles under pressure" },
+      { moveIndex: 55, comment: "The breakthrough with pawns leads to promotion and mate" }
+    ]
+  },
+  {
+    id: "nakamura-aronian-2",
+    title: "Hikaru Nakamura vs Levon Aronian - Precision Victory",
+    event: "World Chess Championship Candidates",
+    site: "Khanty-Mansiysk",
+    date: "2016.03.16",
+    white: "Hikaru Nakamura",
+    black: "Levon Aronian",
+    result: "1-0",
+    description: "Nakamura defeats Aronian with flawless execution, converting a small advantage into a won endgame through perfect technique.",
+    moves: ["d4", "Nf6", "Bf4", "d5", "e3", "c5", "Nf3", "cxd4", "exd4", "Nc6", "c3", "Ne4", "Bd3", "Nxf2", "Kxf2", "dxd4", "cxd4", "Qa5+", "Nc3", "Qxf4", "Nge2", "Nxd4", "Nxd4", "Qxd4+", "Kf1", "O-O", "Be2", "Bf5", "O-O", "Rad8", "Qc2", "Rfe8", "Rad1", "Qh4", "Nf3", "Qh6", "Bxf5", "Qxf5", "Qc3", "Qf4", "Kg2", "h6", "h3", "Re7", "Rfc1", "Red8", "Ne5", "Qe4", "Qxe4", "Rxe4", "Rc4", "Rxc4", "Nxc4", "Rd2", "Kf3", "Rxb2", "Ne5", "Rb3", "Kf4", "Kf7", "Kf5", "Ke7", "Nf3", "Kf8", "Nd4", "Kg7", "Ne6+", "Kg6", "Nxf8", "Kxf5", "Nd7", "Kg4", "Kg2", "Kxh3", "Nf6", "Kg4", "Nh5", "Kh4", "Nf4", "g5", "Nh3", "g4", "Nf2", "g3", "Nh3", "g2", "Nf2", "g1=Q", "Nxg1"],
+    keyMoments: [
+      { moveIndex: 20, comment: "Nakamura trades pieces maintaining advantage" },
+      { moveIndex: 35, comment: "The endgame is technically won for White" },
+      { moveIndex: 50, comment: "Perfect pawn promotion secures the victory" }
+    ]
+  },
+  {
+    id: "fischer-vs-petrosian-3",
+    title: "Bobby Fischer vs Tigran Petrosian - Flawless Preparation",
+    event: "Santa Monica",
+    site: "Santa Monica, USA",
+    date: "1966.08.04",
+    white: "Bobby Fischer",
+    black: "Tigran Petrosian",
+    result: "1-0",
+    description: "Another brilliant Fischer victory over Petrosian, showing Fischer's superior understanding of dynamic play and attack.",
+    moves: ["e4", "c5", "Nf3", "d6", "d4", "cxd4", "Nxd4", "Nf6", "Nc3", "a6", "Be3", "e5", "Nb3", "Be7", "f3", "O-O", "Qd2", "Nbd7", "O-O-O", "b5", "a4", "b4", "Ne2", "a5", "Kb1", "Ra7", "g4", "Ne8", "g5", "a4", "Nxa4", "Rxa4", "Qxa4", "Qb6", "Qb3", "Nxe4", "fxe4", "Qxb3", "Kxb3", "Nc7", "Bf4", "Ne6", "Bxe6", "fxe6", "g6", "Be7", "gxh7+", "Kh8", "h4", "Kg7", "h5", "Kf7", "e5", "dxe5", "d5", "exd5", "Nd5", "Bf8", "Ne7", "Bc5", "Ng8", "Rh7", "Ne7+", "Kg7", "Ng6", "Rh6", "Ne5", "Rh3", "Nf7", "Rh7", "Nh6", "Rh3", "Nf7", "Kg1", "Nd8", "Kf2", "e4", "Ne2", "e3+", "Kxe3", "Bb4+", "Kd3", "Bc5", "Kd4", "Bf8", "Nf4", "g6", "hxg6", "Nd6", "gxf7", "Nxf4", "f8=Q", "Ne2", "Qe8+", "Kh7", "Qg6#"],
+    keyMoments: [
+      { moveIndex: 25, comment: "Fischer launches a kingside pawn storm" },
+      { moveIndex: 40, comment: "The attack becomes decisive" },
+      { moveIndex: 60, comment: "Pawn promotion and checkmate conclude Fischer's masterpiece" }
+    ]
+  },
+  {
+    id: "aronian-caruana",
+    title: "Levon Aronian vs Fabiano Caruana - Brilliant Sacrifice",
+    event: "Grand Chess Tour",
+    site: "Paris",
+    date: "2018.07.08",
+    white: "Levon Aronian",
+    black: "Fabiano Caruana",
+    result: "1-0",
+    description: "Aronian executes a stunning bishop sacrifice that leads to a devastating attack against Caruana's exposed king.",
+    moves: ["e4", "c5", "Nf3", "d6", "d4", "cxd4", "Nxd4", "Nf6", "Nc3", "a6", "Bg5", "e6", "f4", "Be7", "Qf3", "Nbd7", "O-O-O", "b5", "Bxf6", "Nxf6", "e5", "dxe5", "fxe5", "Nxe5", "Nxe6", "fxe6", "Bxb5+", "Bd7", "Bxd7+", "Nxd7", "Qf7", "Rf8", "Qxe7", "Qxe7", "Nxe7", "Kd8", "Nf5", "Kc7", "Rd7", "Kb8", "Rhd1", "Rf5", "Ne3", "Rxe5", "Rd8", "Kb7", "R8d7", "Kc8", "Rxd6", "Qb8", "Nf5", "Qb1+", "Ka2", "Qb5", "Rd8", "Kc7", "Rcxc6", "bxc6", "Rd7", "Kb8", "Rxf7", "Rc7", "Rf8", "Kb7", "Rb8", "Ka7", "Rb6", "Ka8", "Rf8", "Ka7", "Ra8#"],
+    keyMoments: [
+      { moveIndex: 22, comment: "Aronian sacrifices the bishop for decisive advantage" },
+      { moveIndex: 35, comment: "The attack overwhelming Caruana's position" },
+      { moveIndex: 50, comment: "Checkmate - Aronian's brilliant sacrifice pays off" }
     ]
   }
 ];
